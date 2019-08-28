@@ -4,6 +4,7 @@ import { View, Button, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
+import Flex from '../../components/flex/index'
 
 import './index.scss'
 
@@ -83,10 +84,14 @@ class Index extends Component {
 
   render () {
     return (
-      <View className='index'>
+      <View className="index">
        <Button onClick={() => this.onClick()}>
          跳转到Test Page
        </Button>
+       <Flex justify="center">
+         <Text>1</Text>
+         <Text>2</Text>
+       </Flex>
       </View>
     )
   }

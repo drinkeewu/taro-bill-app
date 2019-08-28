@@ -9,6 +9,9 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
+  alias: {
+    '@': 'src',
+  },
   plugins: {
     babel: {
       sourceMap: true,
