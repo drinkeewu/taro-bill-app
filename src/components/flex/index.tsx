@@ -1,9 +1,6 @@
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
 
-
-
-
 export default (props)=> {
 
   const {
@@ -24,7 +21,8 @@ export default (props)=> {
       paddingRight: paddingX || 0,
       paddingTop: paddingY || 0,
       paddingBottom: paddingY || 0,
-    }}>
+    }}
+    >
       {props.children}
     </View>
   )
