@@ -2,6 +2,11 @@
 
 .home-banner {
   background-color: $blue;
+  position: fixed;
+  top: 44pt;
+  left: 0;
+  right: 0;
+  z-index: 500;
   .home-title {
     font-size: 18pt
   }

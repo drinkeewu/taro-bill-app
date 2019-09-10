@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View, Text, ScrollView } from "@tarojs/components";
 import Flex from "@/components/flex";
 import "./detail.scss";
 
@@ -58,7 +58,11 @@ export default ({ days }: Props) => {
     borderBottom:'1px solid #eee'
   }
   return (
-    <View className="home-detail">
+    <ScrollView className="home-detail" style={{
+      paddingTop: 44 / 0.75 + 74 + 'px',
+      paddingBottom: 60 + 'px'
+    }}
+    >
       <View className="detail-item">
         {days &&
           days.map((day, index) => {
@@ -95,6 +99,6 @@ export default ({ days }: Props) => {
             );
           })}
       </View>
-    </View>
+    </ScrollView>
   );
 };

@@ -1,12 +1,10 @@
-import { View, Text } from "@tarojs/components";
+import NavBar from '@/components/nav-bar/index';
+import TabBar from '@/components/tab-bar/index'
+import { View } from "@tarojs/components";
 import Taro, { useState } from "@tarojs/taro";
-import "./home.scss";
 import Banner from "./banner/index";
 import Detail from "./detail";
 import { Week,ChargeType } from "./detail/index";
-import NavBar from '@/components/nav-bar/index';
-
-
 
 
 
@@ -31,32 +29,18 @@ export default () => {
       ]
     },
 
-    {
-      date: "08月08日",
-      week: Week.Sun,
-      chargeType: ChargeType.Income,
-      total: 88,
-      bills: [
-        {
-          category: "餐饮",
-          desc: "早餐",
-          amount: 12
-        },
-        {
-          category: "餐饮",
-          desc: "早餐",
-          amount: 12
-        }
-      ]
-    }
+
   ]);
 
-  return (
-    <View className="homepage">
-      <NavBar />
-      <Banner />
+  function onTabBarChange(e) {
+  }
 
+  return (
+    <View className="homepage top-wrapper">
+      <NavBar title="APP" />
+      <Banner />
       <Detail days={days} />
+      <TabBar onChange={onTabBarChange} />
     </View>
   );
 };

@@ -2,8 +2,7 @@ import "@tarojs/async-await";
 import "taro-ui/dist/style/index.scss";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { Provider } from "@tarojs/redux";
-
-import Index from "./pages/index";
+import Index from "./pages/home";
 
 import configStore from "./store";
 
@@ -29,7 +28,11 @@ class App extends Component {
 
   componentDidMount() {}
   config: Config = {
-    pages: ["pages/home/index", "pages/index/index"],
+    pages: [
+      "pages/home/index", //明细页面
+      "pages/statistics/index", //统计页面
+      "pages/index/index",
+    ],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
@@ -56,10 +59,9 @@ class App extends Component {
   }
 }
 
-Taro.getSystemInfo({}).then(res => {
-  console.log(res)
-  const {platform} = res;
-  Taro.$navBarHeight = platform.includes('Android') ? 48 : 44
+Taro.getSystemInfo({}).then(config => {
+  console.log('sysinfo', config)
 })
+
 
 Taro.render(<App />, document.getElementById("app"));
