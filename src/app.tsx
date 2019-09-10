@@ -9,12 +9,13 @@ import configStore from "./store";
 
 import "./app.scss";
 
+
+
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
-
 const store = configStore();
 
 class App extends Component {
@@ -33,7 +34,8 @@ class App extends Component {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
       navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black"
+      navigationBarTextStyle: "black",
+      navigationStyle: 'custom',
     }
   };
 
@@ -53,5 +55,11 @@ class App extends Component {
     );
   }
 }
+
+Taro.getSystemInfo({}).then(res => {
+  console.log(res)
+  const {platform} = res;
+  Taro.$navBarHeight = platform.includes('Android') ? 48 : 44
+})
 
 Taro.render(<App />, document.getElementById("app"));

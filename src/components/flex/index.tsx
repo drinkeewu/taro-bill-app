@@ -1,30 +1,60 @@
-import Taro from '@tarojs/taro';
-import { View } from '@tarojs/components';
+import Taro from "@tarojs/taro";
+import { View } from "@tarojs/components";
+import { CSSProperties, FunctionComponent } from "react";
 
-export default (props)=> {
 
-  const {
-    align,
-    justify,
-    direction,
-    paddingX,
-    paddingY,
-  } = props;
-
-  return (
-    <View style={{
-      display: 'flex',
-      alignItems: align || 'unset',
-      justifyContent: justify || 'start',
-      flexDirection: direction || 'flex-start',
-      paddingLeft: paddingX || 0,
-      paddingRight: paddingX || 0,
-      paddingTop: paddingY || 0,
-      paddingBottom: paddingY || 0,
-    }}
-    >
-      {props.children}
-    </View>
-  )
-
+type Padding = [
+  (string|undefined)?,
+  (string|undefined)?,
+  (string|undefined)?,
+  (string|undefined)?
+]
+type PaddingObject = {
+  top?:string|undefined,
+  right?:string|undefined,
+  bottom?:string|undefined,
+  left?:string|undefined,
 }
+const paddingFunc = ([top, right, bottom, left]: Padding = []): PaddingObject => {
+  if (right === undefined && bottom === undefined && left === undefined) {
+    left = right = bottom = top;
+  } else if(bottom === undefined && left === undefined) {
+    bottom = top;
+    left = right;
+  }
+
+  return {
+    top,
+    right,
+    bottom,
+    left
+  };
+};
+
+type Props = {
+  align?: string;
+  justify?: string;
+  direction?: string;
+  padding?: Padding;
+  children?: any;
+  style?:CSSProperties,
+  [propName: string]: any
+};
+
+export default (props: Props) => {
+  const { align, justify, direction, padding, style } = props;
+
+  const STYLE = {
+    display: "flex",
+    alignItems: align || "unset",
+    justifyContent: justify || "start",
+    flexDirection: direction || "flex-start",
+    paddingLeft: paddingFunc(padding).left || "0",
+    paddingRight: paddingFunc(padding).right || "0",
+    paddingTop: paddingFunc(padding).top || "0",
+    paddingBottom: paddingFunc(padding).bottom || "0",
+    ...style
+  } as CSSProperties;
+
+  return <View style={STYLE}>{props.children}</View>;
+};

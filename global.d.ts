@@ -9,6 +9,11 @@ declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
 
+
+interface Taro {
+   $navBarHeight: number;
+}
+
 // @ts-ignore
 declare const process: {
   env: {
@@ -16,3 +21,5 @@ declare const process: {
     [key: string]: any;
   }
 }
+
+

@@ -1,5 +1,11 @@
 .home-detail{
-  border-bottom: 1px solid #f3f3f3;
-  .detail-title{
+  .detail-item{
+    margin-bottom: 20px;
+    &__title{
+      border-bottom: 1px solid #f3f3f3;
+    }
+    .bill-item {
+      height: 50px;
+    }
   }
 }

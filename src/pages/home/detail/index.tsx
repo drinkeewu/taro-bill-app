@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-import { View, Text, Image } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import Flex from "@/components/flex";
 import "./detail.scss";
 
@@ -8,12 +8,6 @@ export enum ChargeType {
   Expense,
   Transfer
 }
-
-export type Bill = {
-  category: string;
-  desc: string;
-  amount: number;
-};
 
 export enum Week {
   Sun = 0,
@@ -24,7 +18,13 @@ export enum Week {
   Fri,
   Sat
 }
-
+//每条账单记录详情
+export type Bill = {
+  category: string;
+  desc: string;
+  amount: number;
+};
+//每日详情
 export type DayDetail = {
   date: string;
   week: Week;
@@ -54,38 +54,43 @@ const CHARGE_TYPE = {
 };
 
 export default ({ days }: Props) => {
+  const borderBottomStyle = {
+    borderBottom:'1px solid #eee'
+  }
   return (
     <View className="home-detail">
-      <View className="detail-title">
+      <View className="detail-item">
         {days &&
           days.map((day, index) => {
             return (
               <View key={"day-item" + index}>
-                <Flex
-                  justify="space-between"
-                  paddingX="20px"
-                  paddingY="5px"
-                >
-                  <Text>
-                    {day.date} {WEEK_FILTER[day.week]}
-                  </Text>
-                  <Text>
-                    {CHARGE_TYPE[day.chargeType]}: {day.total}
-                  </Text>
-                </Flex>
-                {day.bills && day.bills.map((bill, bIndex) => {
-                  return (
-                    <Flex
-                      justify="space-between"
-                      paddingX="20px"
-                      paddingY="5px"
-                      key={`bill-item-${bIndex}`}
-                    >
-                      <Text>{bill.desc}</Text>
-                      <Text>{bill.amount}</Text>
-                    </Flex>
-                  )
-                })}
+                  <Flex
+                    className="detail-item__title"
+                    justify="space-between"
+                    padding={['5px', '20px']}
+                    style={borderBottomStyle}
+                  >
+                    <Text>
+                      {day.date} {WEEK_FILTER[day.week]}
+                    </Text>
+                    <Text>
+                      {CHARGE_TYPE[day.chargeType]}: {day.total}
+                    </Text>
+                  </Flex>
+                {day.bills &&
+                  day.bills.map((bill, bIndex) => {
+                    return (
+                      <Flex
+                        className="bill-item"
+                        justify="space-between"
+                        padding={['5px', '20px']}
+                        key={`bill-item-${bIndex}`}
+                      >
+                        <Text>{bill.desc}</Text>
+                        <Text>{bill.amount}</Text>
+                      </Flex>
+                    );
+                  })}
               </View>
             );
           })}
