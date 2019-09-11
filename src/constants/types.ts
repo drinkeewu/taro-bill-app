@@ -1,2 +1,3 @@
 export const SET_NAVBAR_HEIGHT = 'SET_NAVBAR_HEIGHT'
+export const UPDATE_TABBAR_CACHE = 'UPDATE_TABBAR_CACHE' //tabbar缓存
 

@@ -1,5 +1,23 @@
-import { SET_NAVBAR_HEIGHT } from '../constants/types';
-import Taro from '@tarojs/taro';
+import { SET_NAVBAR_HEIGHT, UPDATE_TABBAR_CACHE } from '../constants/types';
 
 const INIT_STATE = {
+  tabPath: '/pages/home/home'
 }
+
+export default function reducer (state = INIT_STATE, {type, payload}) {
+  switch (type) {
+    case UPDATE_TABBAR_CACHE:
+      return payload !== '/pages/add-bill/index'
+        ? {
+          ...state,
+          tabPath: payload
+        }
+        : state
+      break;
+
+    default:
+      return state
+  }
+}
+
+

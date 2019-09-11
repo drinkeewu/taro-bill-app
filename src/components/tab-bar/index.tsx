@@ -1,26 +1,29 @@
 import Taro,{useState}from '@tarojs/taro';
 import { AtTabBar } from 'taro-ui'
 
+
+
 type Props = {
-  onChange? : (e:number) => void
+  onChange? : (e:number) => void,
+  current: number
 }
 
 export default (props: Props) => {
 
-  const [activeTab, setActveTab] = useState(0)
+  const {current} = props
 
   const routeMap = {
     0 : '/pages/home/index',
+    1 : '/pages/statistics/index',
   }
 
   function onTabClick(e:number) {
-    setActveTab(e)
     props.onChange && props.onChange(e)
-    navigate(routeMap[e])
+    // navigate(routeMap[e])
   }
 
   function navigate(url:string) {
-    url && Taro.navigateTo({
+    url && Taro.switchTab({
       url
     })
   }
@@ -36,7 +39,7 @@ export default (props: Props) => {
     ]}
     selectedColor="#58c5fb"
     fontSize={12}
-    current={activeTab}
+    current={current}
     onClick={onTabClick}
   />
 }

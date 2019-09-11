@@ -10,7 +10,6 @@
     "jsx-quotes": ["error", "prefer-double"],
     "import/prefer-default-export": "off"
 
-
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

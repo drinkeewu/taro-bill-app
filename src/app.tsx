@@ -2,7 +2,7 @@ import "@tarojs/async-await";
 import "taro-ui/dist/style/index.scss";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { Provider } from "@tarojs/redux";
-import Index from "./pages/home";
+import Index from "./pages/home/home";
 
 import configStore from "./store";
 
@@ -29,17 +29,42 @@ class App extends Component {
   componentDidMount() {}
   config: Config = {
     pages: [
-      "pages/home/index", //明细页面
-      "pages/statistics/index", //统计页面
+      "pages/home/home", //明细页面
       "pages/index/index",
+      'pages/add-bill/index',
     ],
     window: {
       backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff",
+      navigationBarBackgroundColor: "#58c5fb",
       navigationBarTitleText: "WeChat",
       navigationBarTextStyle: "black",
-      navigationStyle: 'custom',
-    }
+    },
+    // tabBar: {
+    //   color: '#666',
+    //   selectedColor: '#58c5fb',
+    //   list: [
+    //     {
+    //       pagePath: 'pages/home/home',
+    //       text: '明细'
+    //     },
+    //     {
+    //       pagePath: 'pages/statistics/index',
+    //       text: '统计'
+    //     },
+    //     {
+    //       pagePath: 'pages/add-bill/index',
+    //       text: '添加'
+    //     },
+    //     {
+    //       pagePath: 'pages/account/index',
+    //       text: '账户'
+    //     },
+    //     {
+    //       pagePath: 'pages/setting/index',
+    //       text: '设置'
+    //     }
+    //   ]
+    // }
   };
 
   componentDidShow() {}

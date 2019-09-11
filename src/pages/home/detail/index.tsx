@@ -1,41 +1,9 @@
-import Taro from "@tarojs/taro";
+import Taro, { useDidShow, useEffect } from "@tarojs/taro";
 import { View, Text, ScrollView } from "@tarojs/components";
 import Flex from "@/components/flex";
 import "./detail.scss";
-
-export enum ChargeType {
-  Income = 1,
-  Expense,
-  Transfer
-}
-
-export enum Week {
-  Sun = 0,
-  Mon,
-  Tue,
-  Wed,
-  Thu,
-  Fri,
-  Sat
-}
-//每条账单记录详情
-export type Bill = {
-  category: string;
-  desc: string;
-  amount: number;
-};
-//每日详情
-export type DayDetail = {
-  date: string;
-  week: Week;
-  chargeType: ChargeType;
-  bills: Bill[];
-  total: number;
-};
-
-export type Props = {
-  days: DayDetail[];
-};
+import { Week, ChargeType, Props } from "./types";
+import Banner from '../banner/index'
 
 const WEEK_FILTER = {
   [Week.Sun]: "星期日",
@@ -53,13 +21,26 @@ const CHARGE_TYPE = {
   [ChargeType.Transfer]: "转账"
 };
 
-export default ({ days }: Props) => {
+
+
+export default ({ days } : Props) => {
   const borderBottomStyle = {
     borderBottom:'1px solid #eee'
   }
+  useDidShow(() => {
+    console.log('detail did show')
+  })
+  useEffect(() => {
+    console.log('detail effect')
+    return () => {
+
+    };
+  })
   return (
+    <View>
+    <Banner />
     <ScrollView className="home-detail" style={{
-      paddingTop: 44 / 0.75 + 74 + 'px',
+      paddingTop: 74 + 'px',
       paddingBottom: 60 + 'px'
     }}
     >
@@ -100,5 +81,6 @@ export default ({ days }: Props) => {
           })}
       </View>
     </ScrollView>
+    </View>
   );
 };
