@@ -35,9 +35,10 @@ export default () => {
 
   const [activeTab, setActiveTab] = useState(0)
 
-  function onTabBarChange(e:number) {
-    setActiveTab(e)
-    e === 2 && Taro.navigateTo({
+  function onTabBarChange(activeIndex:number) {
+    activeIndex !==2
+    ? setActiveTab(activeIndex)
+    : Taro.navigateTo({
       url: '/pages/add-bill/index'
     })
   }
