@@ -41,7 +41,7 @@ type Props = {
   [propName: string]: any
 };
 
-export default (props: Props) => {
+const Flex = (props: Props) => {
   const { align, justify, direction, padding, style } = props;
 
   const STYLE = {
@@ -58,3 +58,5 @@ export default (props: Props) => {
 
   return <View style={STYLE}>{props.children}</View>;
 };
+
+export default Flex

@@ -1,3 +1,8 @@
+/* 改变主题变量，具体变量名可查看 taro-ui/dist/style/variables/default.scss 文件 */
+$color-brand: #5fb0E8;
+
+/* 引入 Taro UI 默认样式 */
+@import "~taro-ui/dist/style/index.scss";
 page,
 .top-wrapper {
   height: 100%;
@@ -8,3 +13,12 @@ page {
     color: #333;
   }
 }
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+

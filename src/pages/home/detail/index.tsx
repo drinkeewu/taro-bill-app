@@ -1,11 +1,11 @@
-import Taro, { useDidShow, useEffect } from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 import { View, Text, ScrollView } from "@tarojs/components";
 import Flex from "@/components/flex";
 import "./detail.scss";
 import { Week, ChargeType, Props } from "./types";
 import Banner from '../banner/index'
 
-const WEEK_FILTER = {
+export const WEEK_FILTER = {
   [Week.Sun]: "星期日",
   [Week.Mon]: "星期一",
   [Week.Tue]: "星期二",
@@ -15,72 +15,64 @@ const WEEK_FILTER = {
   [Week.Sat]: "星期六"
 };
 
-const CHARGE_TYPE = {
+export const CHARGE_TYPE = {
   [ChargeType.Income]: "收入",
   [ChargeType.Expense]: "支出",
   [ChargeType.Transfer]: "转账"
 };
 
-
+const borderBottomStyle = {
+  borderBottom:'1px solid #eee'
+}
 
 export default ({ days } : Props) => {
-  const borderBottomStyle = {
-    borderBottom:'1px solid #eee'
-  }
-  useDidShow(() => {
-    console.log('detail did show')
-  })
-  useEffect(() => {
-    console.log('detail effect')
-    return () => {
 
-    };
-  })
+
   return (
     <View>
-    <Banner />
-    <ScrollView className="home-detail" style={{
-      paddingTop: 74 + 'px',
-      paddingBottom: 60 + 'px'
-    }}
-    >
-      <View className="detail-item">
-        {days &&
-          days.map((day, index) => {
-            return (
-              <View key={"day-item" + index}>
-                  <Flex
-                    className="detail-item__title"
-                    justify="space-between"
-                    padding={['5px', '20px']}
-                    style={borderBottomStyle}
-                  >
-                    <Text>
-                      {day.date} {WEEK_FILTER[day.week]}
-                    </Text>
-                    <Text>
-                      {CHARGE_TYPE[day.chargeType]}: {day.total}
-                    </Text>
-                  </Flex>
-                {day.bills &&
-                  day.bills.map((bill, bIndex) => {
-                    return (
-                      <Flex
-                        className="bill-item"
-                        justify="space-between"
-                        padding={['5px', '20px']}
-                        key={`bill-item-${bIndex}`}
-                      >
-                        <Text>{bill.desc}</Text>
-                        <Text>{bill.amount}</Text>
-                      </Flex>
-                    );
+      <Banner />
+      <ScrollView className="home-detail" style={{
+        paddingTop: 74 + 'px',
+        paddingBottom: 60 + 'px'
+      }}
+      >
+        <View className="detail-item">
+          {days &&
+            days.map((day, index) => {
+              return (
+                <View key={"day-item" + index}>
+                    <Flex
+                      className="detail-item__title"
+                      justify="space-between"
+                      padding={['5px', '20px']}
+                      style={borderBottomStyle}
+                    >
+                      <Text>
+                        {day.date} {WEEK_FILTER[day.week]}
+                      </Text>
+                      <Text>
+                        {CHARGE_TYPE[day.chargeType]}: {day.total}
+                      </Text>
+                    </Flex>
+                  {day.bills &&
+                    day.bills.map((bill, bIndex) => {
+                      return (
+                        <Flex
+                          className="bill-item"
+                          justify="space-between"
+                          padding={['5px', '20px']}
+                          key={`bill-item-${bIndex}`}
+                        >
+                          <Text>{bill.desc}</Text>
+                          <Text>{bill.amount}</Text>
+                        </Flex>
+                      );
                   })}
-              </View>
-            );
-          })}
-      </View>
-    </ScrollView>
+                </View>
+              );
+            })}
+        </View>
+      </ScrollView>
     </View>
   );
 };

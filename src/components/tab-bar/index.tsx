@@ -19,14 +19,9 @@ export default (props: Props) => {
 
   function onTabClick(e:number) {
     props.onChange && props.onChange(e)
-    // navigate(routeMap[e])
   }
 
-  function navigate(url:string) {
-    url && Taro.switchTab({
-      url
-    })
-  }
+
 
   return <AtTabBar
     fixed

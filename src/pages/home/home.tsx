@@ -43,15 +43,15 @@ export default () => {
     })
   }
 
-  const router = useRouter()
 
 
 
   useEffect(() => {
-    console.log(router)
-    return () => {
+    //TO TEST
+    Taro.navigateTo({
+      url: '/pages/add-bill/index'
+    })
 
-    };
   })
 
 
@@ -59,6 +59,7 @@ export default () => {
 
   return (
     <View className="homepage top-wrapper">
+
       {
         activeTab === 0
         ? <Detail days={days} />
