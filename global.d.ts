@@ -1,3 +1,4 @@
+
 declare module "*.png";
 declare module "*.gif";
 declare module "*.jpg";
@@ -8,6 +9,7 @@ declare module "*.less";
 declare module "*.scss";
 declare module "*.sass";
 declare module "*.styl";
+
 
 
 interface Taro {

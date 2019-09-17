@@ -8,9 +8,7 @@ type Props = {
 
 export default ({title}: Props) => {
 
-  useEffect(() => {
-    console.log(Taro)
-  })
+
   const style:CSSProperties= {
     zIndex:500,
     position: 'fixed',

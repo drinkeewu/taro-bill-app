@@ -6,13 +6,8 @@ export default (props) => {
   let [state, setState] = useState(0)
   useDidShow(() => {
     setState(++state)
-    console.log('sta show')
   })
-  useEffect(() => {
-    console.log('statistic effect', state)
-    return () => {
-    };
-  }, [state])
+
   return (
     <View>
       <Text>

@@ -3,6 +3,7 @@ $color-brand: #5fb0E8;
 
 /* 引入 Taro UI 默认样式 */
 @import "~taro-ui/dist/style/index.scss";
+@import "./components/input-panel/input-panel.scss";
 page,
 .top-wrapper {
   height: 100%;

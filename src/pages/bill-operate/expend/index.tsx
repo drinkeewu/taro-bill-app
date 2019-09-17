@@ -1,4 +1,4 @@
-import Taro, { useState, useEffect } from "@tarojs/taro";
+import Taro, { useState, useEffect, useCallback, useDidShow } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import "taro-ui/dist/style/components/flex.scss";
 import CategoryIcon from "@/components/category-icon/index";
@@ -26,10 +26,15 @@ export default ({
   function onCategoryClick(id: number) {
     setSelectedId(id)
   }
+  useDidShow(() => {
+    console.log('componentDidShow')
+  })
 
   useEffect(() => {
     selectedId && onSelectChange(true)
   }, [onSelectChange, selectedId])
+
+
 
   return (
     <View>

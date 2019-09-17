@@ -1,7 +1,7 @@
 import "@tarojs/async-await";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { Provider } from "@tarojs/redux";
-import Index from "./pages/home/home";
+import Index from "./pages/home";
 
 import configStore from "./store";
 
@@ -28,7 +28,7 @@ class App extends Component {
   componentDidMount() {}
   config: Config = {
     pages: [
-      "pages/home/home", //明细页面
+      "pages/home/index", //明细页面
       "pages/index/index",
       'pages/add-bill/index',
     ],
@@ -83,9 +83,7 @@ class App extends Component {
   }
 }
 
-Taro.getSystemInfo({}).then(config => {
-  console.log('sysinfo', config)
-})
+
 
 
 Taro.render(<App />, document.getElementById("app"));

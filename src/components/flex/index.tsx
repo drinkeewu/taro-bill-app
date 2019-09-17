@@ -42,7 +42,7 @@ type Props = {
 };
 
 const Flex = (props: Props) => {
-  const { align, justify, direction, padding, style } = props;
+  const { align, justify, direction, padding, style, className } = props;
 
   const STYLE = {
     display: "flex",
@@ -56,7 +56,7 @@ const Flex = (props: Props) => {
     ...style
   } as CSSProperties;
 
-  return <View style={STYLE}>{props.children}</View>;
+  return <View style={STYLE} className={className}>{props.children}</View>;
 };
 
 export default Flex
