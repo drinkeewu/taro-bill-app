@@ -3,7 +3,7 @@ import {
   MINUS
 } from '../constants/counter'
 
-const add = () => {
+export const add = () => {
 
   return {
     type: ADD

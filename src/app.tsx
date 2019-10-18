@@ -6,7 +6,9 @@ import Index from "./pages/home";
 import configStore from "./store";
 
 import "./app.scss";
+import { addDateUtil } from './utils/index';
 
+addDateUtil()
 
 
 // 如果需要在 h5 环境中开启 React Devtools
@@ -15,6 +17,8 @@ import "./app.scss";
 //   require('nerv-devtools')
 // }
 const store = configStore();
+
+
 
 class App extends Component {
   /**
@@ -34,13 +38,13 @@ class App extends Component {
     ],
     window: {
       backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#58c5fb",
-      navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black",
+      navigationBarBackgroundColor: "#6190E8",
+      navigationBarTitleText: "Bill",
+      navigationBarTextStyle: "white",
     },
     // tabBar: {
     //   color: '#666',
-    //   selectedColor: '#58c5fb',
+    //   selectedColor: '#6190E8',
     //   list: [
     //     {
     //       pagePath: 'pages/home/home',

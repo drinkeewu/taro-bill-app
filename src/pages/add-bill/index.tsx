@@ -26,7 +26,6 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    console.log("add bill effect");
     return () => {};
   }, []);
 

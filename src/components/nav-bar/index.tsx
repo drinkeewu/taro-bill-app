@@ -16,7 +16,7 @@ export default ({title}: Props) => {
     left: 0,
     right: 0,
     height: 44 / 0.75+ 'px',
-    backgroundColor: '#58c5fb',
+    backgroundColor: '#6190E8',
     lineHeight: (44 + 20) / 0.75 + 'px',
     textAlign: 'center',
     color: '#fff'

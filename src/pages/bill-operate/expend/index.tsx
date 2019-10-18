@@ -27,7 +27,6 @@ export default ({
     setSelectedId(id)
   }
   useDidShow(() => {
-    console.log('componentDidShow')
   })
 
   useEffect(() => {

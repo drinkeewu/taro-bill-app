@@ -1,6 +1,6 @@
 import { View } from "@tarojs/components";
 import TabBar from '@/components/tab-bar/index';
-import Taro, { useState, useEffect, useRouter } from "@tarojs/taro";
+import Taro, { useState, useEffect } from "@tarojs/taro";
 import Detail from "./detail"
 import Statistics from '../statistics/index'
 import Setting from '../setting/index'
@@ -9,7 +9,7 @@ import { Week, ChargeType } from "./detail/types";
 
 
 
-export default () => {
+export default function Home()  {
   const [days, setDays] = useState([
     {
       date: "08月08日",
@@ -33,7 +33,7 @@ export default () => {
 
   ]);
 
-  const [activeTab, setActiveTab] = useState(0)
+  const [activeTab, setActiveTab] = useState(1)
 
   function onTabBarChange(activeIndex:number) {
     activeIndex !==2
@@ -47,13 +47,9 @@ export default () => {
 
 
   useEffect(() => {
-    //TO TEST
-    Taro.navigateTo({
-      url: '/pages/add-bill/index'
-    })
+
 
   })
-
 
 
 

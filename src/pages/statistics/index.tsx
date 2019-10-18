@@ -1,25 +1,28 @@
-import Taro, { useEffect, useState, useDidShow } from '@tarojs/taro';
+import Taro, {  useState, useDidShow } from '@tarojs/taro';
 import {View, Text, Button} from '@tarojs/components';
+import { AtTabs, AtTabsPane } from "taro-ui";
+
 
 
 export default (props) => {
-  let [state, setState] = useState(0)
-  useDidShow(() => {
-    setState(++state)
+  const tabList= [
+    { title: '周' },
+    { title: '月' },
+    { title: '年' },
+  ]
+  const [state, setState] = useState({
+    activeTab: 0
   })
+
+  function onTabClick(val: number) {
+    setActiveTab(val);
+    setInputPanelIsOpen(false)
+  }
+
 
   return (
     <View>
-      <Text>
-        统计页面
-        {state}
-      </Text>
-      <Button onClick={() => setState(--state)}>
-          -
-        </Button>
-        <Button onClick={() => setState(++state)}>
-          +
-        </Button>
+
     </View>
   )
 }

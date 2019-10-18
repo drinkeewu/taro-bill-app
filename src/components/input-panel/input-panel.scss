@@ -24,4 +24,11 @@ $border-color: #e3e3e3;
     border-right: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
   }
+  .amount-text {
+    font-size: 50px;
+  }
+  .complete-button {
+    background-color: #6190E8;
+    color: #fff;
+  }
 }

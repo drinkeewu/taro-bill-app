@@ -32,7 +32,7 @@ export default (props: Props) => {
       { title: '账户', iconType: 'credit-card'},
       { title: '设置', iconType: 'settings'},
     ]}
-    selectedColor="#58c5fb"
+    selectedColor="#6190E8"
     fontSize={12}
     current={current}
     onClick={onTabClick}

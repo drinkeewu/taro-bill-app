@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.16.0/libexec/bin/yarn.js add taro-ui/dist/style/components/flex --silent --no-progress
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.16.0/libexec/bin/yarn.js add @styles/ --silent --no-progress
 
 PATH: 
   /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/drinkeewu/Desktop/taro_bill_app/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/drinkeewu/Desktop/taro_bill_app/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -14,7 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.npmjs.org/taro-ui%2fdist/style/components/flex: Request "https://registry.npmjs.org/taro-ui%2fdist/style/components/flex" returned a 405
+  Error: https://registry.npmjs.org/@styles%2f: Request "https://registry.npmjs.org/@styles%2f" returned a 405
       at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:66100:18)
       at Request.self.callback (/usr/local/Cellar/yarn/1.16.0/libexec/lib/cli.js:129590:22)
       at Request.emit (events.js:198:13)
@@ -67,10 +67,12 @@ npm manifest:
       "@tarojs/taro-weapp": "^1.3.18",
       "nerv-devtools": "^1.4.4",
       "nervjs": "^1.4.4",
+      "node-sass": "^4.12.0",
       "react": "^16.9.0",
       "redux": "^4.0.0",
       "redux-logger": "^3.0.6",
       "redux-thunk": "^2.3.0",
+      "sass-loader": "^8.0.0",
       "styled-components": "^4.3.2",
       "taro-ui": "^2.2.2"
     },

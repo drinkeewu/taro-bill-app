@@ -23,7 +23,8 @@
       "node_modules/@types"
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@styles/*": ["./src/styles/*"]
     }
   },
   "exclude": [

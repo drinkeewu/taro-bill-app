@@ -19,7 +19,7 @@ const CategoryIcon =  ({
   onClick
 }: IconProps) => {
   const logoStyle = {
-      backgroundColor: selected ? '#58c5fb' : '#f5f5f5f'
+      backgroundColor: selected ? '#6190E8' : '#f5f5f5f'
   }
   return (
     <View className="category-icon" onClick={onClick}>
