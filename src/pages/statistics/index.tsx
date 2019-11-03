@@ -15,8 +15,10 @@ export default (props) => {
   })
 
   function onTabClick(val: number) {
-    setActiveTab(val);
-    setInputPanelIsOpen(false)
+    setState({
+      ...state,
+      active
+    })
   }
 
 
