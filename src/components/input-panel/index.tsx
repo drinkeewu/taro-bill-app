@@ -78,9 +78,7 @@ const InputPanel = props => {
       || displayString.includes('+')
   }, [state])
 
-  useEffect(() => {
-    console.log(state.displayString)
-  })
+
   /** 字符串中含有的运算符号 */
   const containCalcStr = useMemo(() => {
     const { displayString } = state;

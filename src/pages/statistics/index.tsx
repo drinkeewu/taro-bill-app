@@ -17,14 +17,13 @@ export default (props) => {
   function onTabClick(val: number) {
     setState({
       ...state,
-      active
     })
   }
 
 
   return (
     <View>
-
+      <Text>统计</Text>
     </View>
   )
 }

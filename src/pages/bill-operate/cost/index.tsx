@@ -1,16 +1,18 @@
-import Taro, { useState, useEffect, useCallback, useDidShow } from "@tarojs/taro";
+import Taro, { useState, useEffect } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import "taro-ui/dist/style/components/flex.scss";
 import CategoryIcon from "@/components/category-icon/index";
 
-type ExpendProps = {
+type CostProps = {
   onSelectChange: (is: boolean) => void
+  activeTab: number
 }
 
 export default ({
-  onSelectChange
-}:ExpendProps) => {
-  const [categoryList, setCategoryList] = useState([
+  onSelectChange,
+  activeTab
+}:CostProps) => {
+  const [categoryList] = useState([
     {
       categoryId: 1,
       name: "餐饮"
@@ -23,15 +25,21 @@ export default ({
   const [selectedId, setSelectedId] = useState(0);
 
 
+
   function onCategoryClick(id: number) {
     setSelectedId(id)
   }
-  useDidShow(() => {
-  })
 
   useEffect(() => {
     selectedId && onSelectChange(true)
+
   }, [onSelectChange, selectedId])
+
+  useEffect(() => {
+    if(activeTab !== 0) {
+      setSelectedId(0)
+    }
+  }, [activeTab])
 
 
 

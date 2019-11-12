@@ -13,11 +13,13 @@ $border-color: #e3e3e3;
     padding-left: 10px;
   }
   &__line {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
     line-height: 100px;
+    height: 100px;
     border-bottom: 1px solid $border-color;
   }
   &__item {
@@ -28,6 +30,13 @@ $border-color: #e3e3e3;
     border-bottom: 1px solid $border-color;
   }
   .amount-text {
+    position: absolute;
+    top: 1px;
+    right: 10px;
+    bottom: 1px;
+    z-index: 5;
+    background: #f9f9f9;
+
     font-size: 50px;
   }
   .complete-button {

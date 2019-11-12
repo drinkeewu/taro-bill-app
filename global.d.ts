@@ -18,6 +18,9 @@ interface Taro {
 
 type StringOrNumber = string | number;
 
+
+
+
 interface Date {
   /**
    * 重写期格式化方法

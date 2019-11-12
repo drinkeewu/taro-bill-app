@@ -1,9 +1,14 @@
-import Taro, { useState, useCallback, useEffect } from "@tarojs/taro";
-import Expend from "@/pages/bill-operate/expend/index";
 import { View } from "@tarojs/components";
-import { AtTabs, AtTabsPane } from "taro-ui";
 import Render from "@/components/render";
 import InputPanel from "@/components/input-panel";
+import { AtTabs, AtTabsPane } from "taro-ui";
+import Taro, { useState, useCallback, useEffect } from "@tarojs/taro";
+import Cost from "@/pages/bill-operate/cost/index";
+import Income from '../bill-operate/income/index';
+import Transfer from '../bill-operate/transfer/index';
+
+
+
 
 export default () => {
   const tabList = [
@@ -12,8 +17,8 @@ export default () => {
     { title: "收入" }
   ];
 
-  const [activeTab, setActiveTab] = useState(0);
-  const [inputPanelIsOpen, setInputPanelIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(0)
+  const [inputPanelIsOpen, setInputPanelIsOpen] = useState(false)
 
   /**
    *
@@ -21,17 +26,22 @@ export default () => {
    * @param {number} val
    */
   function onTabClick(val: number) {
-    setActiveTab(val);
-    setInputPanelIsOpen(false)
+    setActiveTab(val)
   }
 
-  const onSelectCategoryCallback = useCallback((val: boolean) => {
-    setInputPanelIsOpen(val);
-  }, []);
+
+  const onSelectChange = useCallback(
+    (val: boolean) => {
+      setInputPanelIsOpen(val)
+    },
+    [],
+  )
+
 
   useEffect(() => {
-    return () => {};
-  }, []);
+      setInputPanelIsOpen(false)
+  }, [activeTab])
+
 
   return (
     <View className="full-height">
@@ -40,11 +50,29 @@ export default () => {
         tabList={tabList}
         onClick={onTabClick}
       >
-        <AtTabsPane current={activeTab} index={0}>
-            <Expend onSelectChange={onSelectCategoryCallback} />
+        <AtTabsPane
+          current={activeTab}
+          index={0}
+        >
+            <Cost
+              onSelectChange={onSelectChange}
+              activeTab={activeTab}
+            />
+        </AtTabsPane>
+        <AtTabsPane
+          current={activeTab}
+          index={1}
+        >
+            <Income />
+        </AtTabsPane>
+        <AtTabsPane
+          current={activeTab}
+          index={2}
+        >
+            <Transfer />
         </AtTabsPane>
       </AtTabs>
-      <Render rif>
+      <Render rif={inputPanelIsOpen}>
         <InputPanel />
       </Render>
     </View>
