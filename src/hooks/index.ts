@@ -3,7 +3,7 @@ import { useState } from "@tarojs/taro"
 
 
 /**
- * 输入框输入hooks
+ * 输入框输入双向绑定
  *
  * @param {(string | undefined)} initValue
  * @returns

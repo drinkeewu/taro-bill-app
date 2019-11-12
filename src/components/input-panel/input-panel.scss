@@ -9,6 +9,9 @@ $border-color: #e3e3e3;
   height: 500px;
   border-top: 1px solid $border-color;
   background-color: #f9f9f9;
+  .remark-input {
+    padding-left: 10px;
+  }
   &__line {
     display: flex;
     justify-content: space-between;

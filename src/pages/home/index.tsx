@@ -33,7 +33,7 @@ export default function Home()  {
 
   ]);
 
-  const [activeTab, setActiveTab] = useState(1)
+  const [activeTab, setActiveTab] = useState(0)
 
   function onTabBarChange(activeIndex:number) {
     activeIndex !==2

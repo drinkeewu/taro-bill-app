@@ -6,7 +6,11 @@ import Render from "@/components/render";
 import InputPanel from "@/components/input-panel";
 
 export default () => {
-  const tabList = [{ title: "支出" }, { title: "转账" }, { title: "收入" }];
+  const tabList = [
+    { title: "支出" },
+    { title: "转账" },
+    { title: "收入" }
+  ];
 
   const [activeTab, setActiveTab] = useState(0);
   const [inputPanelIsOpen, setInputPanelIsOpen] = useState(false);

@@ -1,19 +1,12 @@
-import Taro, { useEffect, useState } from '@tarojs/taro';
+import { toString } from '@/shared/util'
+import Taro, { useState, useMemo, useEffect } from '@tarojs/taro';
 import { View, Label, Input, Text } from '@tarojs/components';
 import "taro-ui/dist/style/components/flex.scss";
 import './input-panel.scss'
 import Flex from '../flex';
 import { useInputValue } from '../../hooks/index';
 
-
-
-
 const nowDate = new Date().Format('yyyy-MM-dd')
-
-enum OperateType  {
-  ADD = '+',
-  MINUS = '-'
-}
 
 /**
  * 数字键盘布局数据
@@ -63,11 +56,65 @@ const InputPanel = props => {
   } = useInputValue('')
 
 
-
-  const [state, setstate] = useState({
-    string: '0'
+  const [state, setState] = useState({
+    displayString: '0'
   })
 
+  /** 是否显示等于号 */
+  const canCalc = useMemo(() => {
+    const { displayString } = state;
+    const isAdd = displayString.includes('+')
+    const calcItems = isAdd
+      ? displayString.split('+').map(i => +i)
+      : displayString.split('-').map(i => +i)
+    // eslint-disable-next-line no-restricted-globals
+    return !isNaN(calcItems[0]) && !isNaN(calcItems[1])
+  }, [state])
+
+  /** 字符串中是否已经含有运算符 */
+  const hadCalcString = useMemo(() => {
+    const { displayString } = state;
+    return displayString.includes('-')
+      || displayString.includes('+')
+  }, [state])
+
+  useEffect(() => {
+    console.log(state.displayString)
+  })
+  /** 字符串中含有的运算符号 */
+  const containCalcStr = useMemo(() => {
+    const { displayString } = state;
+    if(hadCalcString) {
+      const isAdd = displayString.includes('+')
+      return isAdd ? '+' : '-'
+    }
+    return ' '
+
+  }, [hadCalcString, state])
+
+  /** 计算队列 */
+  const calcItems = useMemo(() => {
+    return state.displayString.split(
+      containCalcStr
+    ).map(i => +i)
+  }, [containCalcStr, state.displayString])
+
+
+
+  /**
+   * 传入字符串是否是两位小数
+   *
+   * @param {string} string
+   * @returns
+   */
+  function hasTwoDecimal(string:string) {
+    const hasDot = string.includes('.')
+    if(hasDot) {
+      const sides = string.split('.')
+      return !!(sides[1] && sides[1].length === 2)
+    }
+    return false
+  }
 
   /**
    * 键盘点击回调函数
@@ -81,57 +128,112 @@ const InputPanel = props => {
   }):void {
     switch (type) {
       case 'TYPING':
-          handleTyping(value)
+        handleTyping(value)
         break;
 
       case 'DELETE':
-          handleDelete()
+        handleDelete()
         break
 
       case 'MINUS':
       case 'ADD':
       case 'CALC':
-          handleOperate(type, `${value}`)
+        handleOperate(`${value}`)
         break;
-
+      case 'COMPLETE':
+        handleComplete()
+        break;
       default:
         break;
     }
   }
+
   /**
-   * 加减法运算
+   * 运算符操作
+   *
+   * @param {string} type 运算符类型
+   * @param {string} value 运算符字符串值
    */
   function handleOperate(
-    type: string,
-    typeValue: string
+    value: string
   ):void {
+    const { displayString } = state;
 
+    setState({
+      ...state,
+      displayString: hadCalcString
+        ? calcString(displayString) + toString(value)
+        : displayString + toString(value)
+    })
   }
 
+  /**
+   * 计算字符串结果
+   *
+   * @param {string} string
+   */
+  function calcString(string: string) {
+    const isAdd = string.includes('+');
+    /** 需要计算的队列 */
+
+    const total = isAdd
+      ? calcItems.reduce((i ,v) => i+v)
+      : (calcItems[0] - calcItems[1])
+    return toString(total)
+  }
+
+  /**
+   * 输入数字
+   *
+   * @param {StringOrNumber} value 字符串的值
+   */
   function handleTyping(
     value:StringOrNumber
   ) {
-    // setAmountStr(amountStr === '0'
-    //   ? '' + value
-    //   : amountStr + '' + value
-    // )
+    const isDot = value === '.'
+    const { displayString } = state;
+    const stopUpdate =
+      //限制每个运算数不超过8位, 不超过过两位小数
+      (!hadCalcString
+        ? toString(calcItems[0]).length === 8 || hasTwoDecimal(`${calcItems[0]}`)
+        : toString(calcItems[1]).length === 8 || hasTwoDecimal(`${calcItems[1]}`)
+      )
+      || displayString.length === 17
+
+    !stopUpdate && setState({
+      ...state,
+      displayString: displayString === '0' && !isDot
+        ? toString(value)
+        : displayString + toString(value)
+    })
   }
 
+  /**
+   * 退格操作
+   *
+   */
   function handleDelete(){
-    // setAmountStr(
-    //   amountStr !== '0'
-    //   ? amountStr.substring(0, amountStr.length - 1)
-    //   : '0')
+    const { displayString } = state;
+    const isLastString = displayString.length === 1
+    setState({
+      ...state,
+      displayString: isLastString
+        ? '0'
+        : displayString.slice(0, -1)
+    })
   }
 
-
-
-
-
-
-
-
-
+  /**
+   * 点击完成或者 "="
+   *
+   */
+  function handleComplete() {
+    const { displayString } = state
+    canCalc &&  setState({
+      ...state,
+      displayString: calcString(displayString)
+    })
+  }
 
 
   return (
@@ -140,16 +242,17 @@ const InputPanel = props => {
         {/* 输入框 */}
         <View className="comp-input-panel__line">
           <Flex align="center">
-            <Label>
+            <Label style={{flexShrink: 0}}>
               备注:
             </Label>
             <Input
+              className="remark-input"
               value={remark}
               onInput={onRemarkChange}
             />
           </Flex>
           <Text className="amount-text">
-            {}
+            {state.displayString}
           </Text>
         </View>
 
@@ -171,7 +274,12 @@ const InputPanel = props => {
                         onClick={() => onPanelItemClick(col)}
 
                       >
-                        {col.text}
+                        {col.type === 'COMPLETE'
+                          ? canCalc
+                            ? '='
+                            : col.text
+                          : col.text
+                        }
                       </View>
                     )
                   })
