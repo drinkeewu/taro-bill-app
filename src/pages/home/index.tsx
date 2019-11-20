@@ -6,7 +6,7 @@ import Statistics from '../statistics/index'
 import Setting from '../setting/index'
 import Account from '../account/index'
 import { Week, ChargeType } from "./detail/types";
-
+import Router from '../../routes/index';
 
 
 export default function Home()  {
@@ -38,8 +38,8 @@ export default function Home()  {
   function onTabBarChange(activeIndex:number) {
     activeIndex !==2
     ? setActiveTab(activeIndex)
-    : Taro.navigateTo({
-      url: '/pages/add-bill/index'
+    : Router.to({
+      name: 'addBill',
     })
   }
 
@@ -47,7 +47,6 @@ export default function Home()  {
 
 
   useEffect(() => {
-
 
   })
 
@@ -67,7 +66,7 @@ export default function Home()  {
               ? <Account />
               :<Setting />
       }
-      <TabBar  current={activeTab} onChange={onTabBarChange} />
+      {/* <TabBar  current={activeTab} onChange={onTabBarChange} /> */}
     </View>
   );
 };

@@ -40,6 +40,7 @@
     "nerv-devtools": "^1.5.5",
     "nervjs": "^1.5.5",
     "node-sass": "^4.13.0",
+    "query-string": "^6.9.0",
     "querystring": "^0.2.0",
     "react": "^16.12.0",
     "redux": "^4.0.0",

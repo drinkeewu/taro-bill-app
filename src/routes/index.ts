@@ -5,31 +5,59 @@
  * @Last Modified time: 2019-11-12 19:52:29
  */
 
-import { navigateTo } from '@tarojs/taro'
-import qs, { ParsedUrlQuery } from 'querystring'
-import { isEmpty } from 'lodash'
+import { navigateTo, switchTab } from '@tarojs/taro'
+import isEmpty from 'lodash/isEmpty'
 
-const routes = [
+function stringify(obj: Object ) {
+  let string = ''
+  Object.keys(obj).forEach((key, index) => {
+    index > 0 &&  (string += '&')
+    string += `${key}=${obj[key]}`
+  })
+  return string;
+}
+
+type Route = {
+  name: string,
+  path: string
+}
+
+export const routes: Route[] = [
   {
     name: 'home',
     path: 'pages/home/index'
+  },
+  {
+    name: 'addBill',
+    path: 'pages/add-bill/index'
+  },
+  {
+    name: 'index',
+    path: 'pages/index/index'
   }
 ]
 
-export default {
+const Router =  {
   to: ({
     name,
-    query = {}
+    query = {},
   }: {
     name: string,
-    query?: ParsedUrlQuery
+    query?: Object,
   }) => {
       const match = routes.find(route => route.name === name)
       const queryString = isEmpty(query)
-        ? ''
-        : qs.stringify(query)
-      match && navigateTo({
-        url: `/${match.path}?${queryString}`
-      })
+      ? ''
+      : stringify(query)
+      if(match){
+        ['home'].includes(match.name)
+        ? switchTab({
+          url: `/${match.path}`
+        })
+        : navigateTo({
+          url: `/${match.path}?${queryString}`
+        })
+      }
   }
 }
+export default Router

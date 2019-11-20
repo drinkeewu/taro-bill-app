@@ -1,5 +1,5 @@
 import { toString } from '@/shared/util'
-import Taro, { useState, useMemo, useEffect } from '@tarojs/taro';
+import Taro, { useState, useMemo } from '@tarojs/taro';
 import { View, Label, Input, Text } from '@tarojs/components';
 import "taro-ui/dist/style/components/flex.scss";
 import './input-panel.scss'
@@ -227,10 +227,12 @@ const InputPanel = props => {
    */
   function handleComplete() {
     const { displayString } = state
-    canCalc &&  setState({
+    canCalc
+    ?  setState({
       ...state,
       displayString: calcString(displayString)
     })
+    : props.onComplete(state.displayString)
   }
 
 

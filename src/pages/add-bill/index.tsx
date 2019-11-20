@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components";
+import Router from "@/routes";
 import Render from "@/components/render";
 import InputPanel from "@/components/input-panel";
 import { AtTabs, AtTabsPane } from "taro-ui";
@@ -9,8 +10,9 @@ import Transfer from '../bill-operate/transfer/index';
 
 
 
-
 export default () => {
+  // Taro.hideTabBar()
+
   const tabList = [
     { title: "支出" },
     { title: "转账" },
@@ -29,6 +31,13 @@ export default () => {
     setActiveTab(val)
   }
 
+  function onInputComplete(result:string) {
+    //TODO 调取接口保存账单记录
+    Router.to({
+      name: 'home',
+    })
+  }
+
 
   const onSelectChange = useCallback(
     (val: boolean) => {
@@ -38,6 +47,7 @@ export default () => {
   )
 
 
+
   useEffect(() => {
       setInputPanelIsOpen(false)
   }, [activeTab])
@@ -45,6 +55,7 @@ export default () => {
 
   return (
     <View className="full-height">
+
       <AtTabs
         current={activeTab}
         tabList={tabList}
@@ -73,7 +84,7 @@ export default () => {
         </AtTabsPane>
       </AtTabs>
       <Render rif={inputPanelIsOpen}>
-        <InputPanel />
+        <InputPanel onComplete={onInputComplete} />
       </Render>
     </View>
   );

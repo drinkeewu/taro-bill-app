@@ -8,6 +8,7 @@ import configStore from "./store";
 import "./app.scss";
 import { addDateUtil } from './utils/index';
 
+
 addDateUtil()
 
 
@@ -20,7 +21,8 @@ const store = configStore();
 
 
 
-class App extends Component {
+
+export class App extends Component {
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -32,9 +34,14 @@ class App extends Component {
   componentDidMount() {}
   config: Config = {
     pages: [
-      "pages/home/index", //明细页面
-      "pages/index/index",
+      'pages/home/index',
       'pages/add-bill/index',
+      'pages/index/index',
+      'pages/statistics/index',
+      'pages/account/index',
+      'pages/setting/index',
+
+
     ],
     window: {
       backgroundTextStyle: "light",
@@ -42,32 +49,32 @@ class App extends Component {
       navigationBarTitleText: "Bill",
       navigationBarTextStyle: "white",
     },
-    // tabBar: {
-    //   color: '#666',
-    //   selectedColor: '#6190E8',
-    //   list: [
-    //     {
-    //       pagePath: 'pages/home/home',
-    //       text: '明细'
-    //     },
-    //     {
-    //       pagePath: 'pages/statistics/index',
-    //       text: '统计'
-    //     },
-    //     {
-    //       pagePath: 'pages/add-bill/index',
-    //       text: '添加'
-    //     },
-    //     {
-    //       pagePath: 'pages/account/index',
-    //       text: '账户'
-    //     },
-    //     {
-    //       pagePath: 'pages/setting/index',
-    //       text: '设置'
-    //     }
-    //   ]
-    // }
+  tabBar: {
+    color: '#666',
+    selectedColor: '#6190E8',
+    list: [
+      {
+        pagePath: 'pages/home/index',
+        text: '明细'
+      },
+      {
+        pagePath: 'pages/statistics/index',
+        text: '统计'
+      },
+      {
+        pagePath: 'pages/add-bill/index',
+        text: '添加'
+      },
+      {
+        pagePath: 'pages/account/index',
+        text: '账户'
+      },
+      {
+        pagePath: 'pages/setting/index',
+        text: '设置'
+      }
+    ]
+  }
   };
 
   componentDidShow() {}
