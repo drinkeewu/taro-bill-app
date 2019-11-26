@@ -1,0 +1,28 @@
+@import '../../styles/global';
+$border-radius: 10px;
+.comp-tab {
+  display: inline-flex;
+  background-color: $blue;
+  text {
+    color: #fff
+  }
+  &__item {
+    line-height: 50px;
+    padding: 0 20px;
+    border: 1px solid #fff;
+    &.first {
+      border-top-left-radius: $border-radius;
+      border-bottom-left-radius: $border-radius;
+    }
+    &.last {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+    &.active {
+      background-color: #fff;
+      text{
+        color: $blue;
+      }
+    }
+  }
+}

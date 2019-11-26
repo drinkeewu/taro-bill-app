@@ -34,6 +34,10 @@ export const routes: Route[] = [
   {
     name: 'index',
     path: 'pages/index/index'
+  },
+  {
+    name: 'statistics',
+    path: 'pages/statistics/index'
   }
 ]
 
@@ -50,7 +54,8 @@ const Router =  {
       ? ''
       : stringify(query)
       if(match){
-        ['home'].includes(match.name)
+        const tabBarRoutes = ['home', 'statistics']
+        tabBarRoutes.includes(match.name)
         ? switchTab({
           url: `/${match.path}`
         })
