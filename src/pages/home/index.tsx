@@ -1,12 +1,7 @@
 import { View } from "@tarojs/components";
-import TabBar from '@/components/tab-bar/index';
-import Taro, { useState, useEffect } from "@tarojs/taro";
+import Taro, { useState, useDidShow } from "@tarojs/taro";
 import Detail from "./detail"
-import Statistics from '../statistics/index'
-import Setting from '../setting/index'
-import Account from '../account/index'
 import { Week, ChargeType } from "./detail/types";
-import Router from '../../routes/index';
 
 
 export default function Home()  {
@@ -33,40 +28,21 @@ export default function Home()  {
 
   ]);
 
-  const [activeTab, setActiveTab] = useState(0)
 
-  function onTabBarChange(activeIndex:number) {
-    activeIndex !==2
-    ? setActiveTab(activeIndex)
-    : Router.to({
-      name: 'addBill',
+
+  useDidShow(() => {
+    this.$scope.getTabBar
+      && typeof this.$scope.getTabBar === 'function'
+      && this.$scope.getTabBar().setData({
+      selected: 0
     })
-  }
-
-
-
-
-  useEffect(() => {
-
   })
 
 
 
   return (
     <View className="homepage top-wrapper">
-
-      {
-        activeTab === 0
-        ? <Detail days={days} />
-        : activeTab === 1
-          ? (<Statistics />)
-          : activeTab === 2
-            ?<View />
-            :activeTab === 3
-              ? <Account />
-              :<Setting />
-      }
-      {/* <TabBar  current={activeTab} onChange={onTabBarChange} /> */}
+      <Detail days={days} />
     </View>
   );
 };

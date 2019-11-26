@@ -1,10 +1,9 @@
 import Taro, {  useState, useDidShow } from '@tarojs/taro';
 import {View, Text, Button} from '@tarojs/components';
-import { AtTabs, AtTabsPane } from "taro-ui";
 
 
 
-export default (props) => {
+export default function Statistics(props)  {
   const tabList= [
     { title: '周' },
     { title: '月' },
@@ -14,12 +13,16 @@ export default (props) => {
     activeTab: 0
   })
 
-  function onTabClick(val: number) {
-    setState({
-      ...state,
-    })
-  }
 
+
+
+  useDidShow(() => {
+    this.$scope.getTabBar
+      && typeof this.$scope.getTabBar === 'function'
+      && this.$scope.getTabBar().setData({
+      selected:1
+    })
+  })
 
   return (
     <View>
