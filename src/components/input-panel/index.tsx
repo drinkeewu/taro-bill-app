@@ -1,6 +1,6 @@
 import { toString } from '@/shared/util'
 import Taro, { useState, useMemo } from '@tarojs/taro';
-import { View, Label, Input, Text } from '@tarojs/components';
+import { View, Label, Input, Text, Picker } from '@tarojs/components';
 import "taro-ui/dist/style/components/flex.scss";
 import './input-panel.scss'
 import Flex from '../flex';
@@ -57,8 +57,9 @@ const InputPanel = props => {
 
 
   const [state, setState] = useState({
-    displayString: '0'
+    displayString: '0',
   })
+  const [date, setDate] = useState(new Date().Format('yyyy-MM-dd'))
 
   /** 是否显示等于号 */
   const canCalc = useMemo(() => {
@@ -235,23 +236,28 @@ const InputPanel = props => {
     : props.onComplete(state.displayString)
   }
 
+  function onDateChange(e:any) {
+    setDate(e.detail.value)
+  }
+
+
 
   return (
-    <View className="comp-input-panel">
+    <View className='comp-input-panel'>
 
         {/* 输入框 */}
-        <View className="comp-input-panel__line">
-          <Flex align="center">
+        <View className='comp-input-panel__line'>
+          <Flex align='center'>
             <Label style={{flexShrink: 0}}>
               备注:
             </Label>
             <Input
-              className="remark-input"
+              className='remark-input'
               value={remark}
               onInput={onRemarkChange}
             />
           </Flex>
-          <Text className="amount-text">
+          <Text className='amount-text'>
             {state.displayString}
           </Text>
         </View>
@@ -260,7 +266,7 @@ const InputPanel = props => {
         {
           LAYOUT.map((row, rowIndex) =>
             <View
-              className="at-row at-row--wrap"
+              className='at-row at-row--wrap'
               key={`row-${rowIndex}`}
             >
             {
@@ -268,17 +274,25 @@ const InputPanel = props => {
                   return (
                       <View
                         className={`at-col at-col-3 comp-input-panel__item ${
-                          col.type === 'COMPLETE' ? 'complete-button':''}`
+                          col.type === 'COMPLETE'
+                            ? 'complete-button'
+                            :''}`
                         }
                         key={`r-${rowIndex}-c-${colIndex}`}
                         onClick={() => onPanelItemClick(col)}
 
                       >
-                        {col.type === 'COMPLETE'
-                          ? canCalc
+                        {col.type === 'COMPLETE' && canCalc
                             ? '='
-                            : col.text
-                          : col.text
+                            : col.type === 'DATE'
+                              ? <Picker
+                                value={date}
+                                mode='date'
+                                onChange={onDateChange}
+                              >
+                                {date}
+                              </Picker>
+                              : col.text
                         }
                       </View>
                     )
@@ -287,6 +301,7 @@ const InputPanel = props => {
             </View>
           )
         }
+
     </View>
   )
 }
