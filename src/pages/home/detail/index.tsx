@@ -1,5 +1,6 @@
 import Taro from "@tarojs/taro";
 import { View, Text, ScrollView } from "@tarojs/components";
+import { AtAvatar } from "taro-ui";
 import Flex from "@/components/flex";
 import "./detail.scss";
 import { Week, ChargeType, Props } from "./types";
@@ -31,25 +32,28 @@ export default ({ days } : Props) => {
   return (
     <View>
       <Banner />
-      <ScrollView className="home-detail" style={{
+      <ScrollView className='home-detail' style={{
         paddingTop: 74 + 'px',
         paddingBottom: 60 + 'px'
       }}
       >
-        <View className="detail-item">
+        <View className='detail-item'>
           {days &&
             days.map((day, index) => {
               return (
                 <View key={"day-item" + index}>
                     <Flex
-                      className="detail-item__title"
-                      justify="space-between"
+                      className='detail-item__title'
+                      justify='space-between'
                       padding={['5px', '20px']}
                       style={borderBottomStyle}
+                      align='center'
                     >
+
                       <Text>
                         {day.date} {WEEK_FILTER[day.week]}
                       </Text>
+
                       <Text>
                         {CHARGE_TYPE[day.chargeType]}: {day.total}
                       </Text>
@@ -58,12 +62,20 @@ export default ({ days } : Props) => {
                     day.bills.map((bill, bIndex) => {
                       return (
                         <Flex
-                          className="bill-item"
-                          justify="space-between"
+                          className='bill-item'
+                          justify='space-between'
+                          align='center'
                           padding={['5px', '20px']}
                           key={`bill-item-${bIndex}`}
                         >
-                          <Text>{bill.desc}</Text>
+                          <Flex align='center'>
+                            <AtAvatar
+                              circle
+                              text='买'
+                              size='small'
+                            />
+                            <Text style={{marginLeft: '10px'}}>{bill.desc}</Text>
+                          </Flex>
                           <Text>{bill.amount}</Text>
                         </Flex>
                       );
