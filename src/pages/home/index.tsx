@@ -37,15 +37,12 @@ export default function Home()  {
       && this.$scope.getTabBar().setData({
       selected: 0
     })
-    Router.to({
-      name :'statistics'
-    })
   })
 
 
 
   return (
-    <View className="homepage top-wrapper">
+    <View className='homepage top-wrapper'>
       <Detail days={days} />
     </View>
   );

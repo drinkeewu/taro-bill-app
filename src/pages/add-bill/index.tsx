@@ -54,7 +54,7 @@ export default () => {
 
 
   return (
-    <View className="full-height">
+    <View className='full-height'>
 
       <AtTabs
         current={activeTab}

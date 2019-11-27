@@ -7,10 +7,14 @@ $border-radius: 10px;
     color: #fff
   }
   &__item {
-    line-height: 50px;
+    line-height: 60px;
     padding: 0 20px;
     border: 1px solid #fff;
+    border-left: none;
+    min-width: 70px;
+    text-align: center;
     &.first {
+      border: 1px solid #fff;
       border-top-left-radius: $border-radius;
       border-bottom-left-radius: $border-radius;
     }

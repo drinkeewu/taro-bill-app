@@ -6,7 +6,6 @@ import Index from "./pages/home";
 import configStore from "./store";
 
 import "./app.scss";
-import './iconfont/iconfont.css'
 import { addDateUtil } from './utils/index';
 
 

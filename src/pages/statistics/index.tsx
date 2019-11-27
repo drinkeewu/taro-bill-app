@@ -1,4 +1,4 @@
-import Taro, { useState, useDidShow } from "@tarojs/taro";
+import Taro, { useState, useDidShow, useEffect } from "@tarojs/taro";
 import { View, Text, Button } from "@tarojs/components";
 import Tabs from "@/components/tabs";
 import Banner from "@/components/banner";
@@ -29,7 +29,7 @@ const cycleType = {
   [CycleType.Year]: '年',
 }
 
-export default function Statistics(props) {
+export default function Statistics() {
   const [activeBillType, setActiveBillType] = useState(BillType.Cost);
   const [activeCycleType, setActiveCycleType] = useState(CycleType.Week)
 
@@ -51,6 +51,20 @@ export default function Statistics(props) {
     : result;
   }
 
+  function onTabsChange({
+    type,
+    index
+  }: {
+    type: 'bill' | 'cycle',
+    index: number
+  }) {
+    if(type === 'bill'){
+      setActiveBillType(index)
+    } else {
+      setActiveCycleType(index)
+    }
+  }
+
   useDidShow(() => {
     this.$scope.getTabBar &&
       typeof this.$scope.getTabBar === "function" &&
@@ -59,18 +73,36 @@ export default function Statistics(props) {
       });
   });
 
+  useEffect(() => {
+    console.log('activeBillType:',activeBillType)
+  }, [activeBillType])
+
+  useEffect(() => {
+    console.log('activeCycleType:', activeCycleType)
+  }, [activeCycleType])
+
   return (
     <View>
       <Banner>
         <Flex justify="space-between">
+          {/* 账单类型切换 */}
           <Tabs
             current={activeBillType}
             data={billTypeTabs}
-          ></Tabs>
+            onChange={(index) => onTabsChange({
+              type: 'bill',
+              index
+            })}
+          />
 
+          {/* 周期类型切换 */}
           <Tabs
             current={activeCycleType}
             data={cycleTypeTabs}
+            onChange={(index) => onTabsChange({
+              type: 'cycle',
+              index
+            })}
           />
         </Flex>
       </Banner>
