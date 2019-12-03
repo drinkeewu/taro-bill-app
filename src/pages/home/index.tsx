@@ -1,8 +1,8 @@
 import { View } from "@tarojs/components";
+import Router from "@/routes";
 import Taro, { useState, useDidShow } from "@tarojs/taro";
 import Detail from "./detail"
 import { Week, ChargeType } from "./detail/types";
-import Router from "@/routes";
 
 
 export default function Home()  {
@@ -35,7 +35,10 @@ export default function Home()  {
     this.$scope.getTabBar
       && typeof this.$scope.getTabBar === 'function'
       && this.$scope.getTabBar().setData({
-      selected: 0
+        selected: 0
+      })
+    Router.to({
+      name: 'account'
     })
   })
 

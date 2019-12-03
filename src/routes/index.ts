@@ -36,6 +36,10 @@ export const routes: Route[] = [
     path: 'pages/index/index'
   },
   {
+    name: 'account',
+    path: 'pages/account/index'
+  },
+  {
     name: 'statistics',
     path: 'pages/statistics/index'
   }
@@ -49,20 +53,20 @@ const Router =  {
     name: string,
     query?: Object,
   }) => {
-      const match = routes.find(route => route.name === name)
-      const queryString = isEmpty(query)
+    const match = routes.find(route => route.name === name)
+    const queryString = isEmpty(query)
       ? ''
       : stringify(query)
-      if(match){
-        const tabBarRoutes = ['home', 'statistics']
-        tabBarRoutes.includes(match.name)
+    if(match){
+      const tabBarRoutes = ['home', 'statistics', 'account']
+      tabBarRoutes.includes(match.name)
         ? switchTab({
           url: `/${match.path}`
         })
         : navigateTo({
           url: `/${match.path}?${queryString}`
         })
-      }
+    }
   }
 }
 export default Router

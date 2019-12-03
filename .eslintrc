@@ -1,5 +1,8 @@
 {
   "extends": ["taro"],
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "no-unused-vars": ["error", {
       "varsIgnorePattern": "Taro"
@@ -8,8 +11,14 @@
       "extensions": [".js", ".jsx", ".tsx"]
     }],
     "jsx-quotes": ["error", "prefer-single"],
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    //默认缩进两个空格
+    "indent": ["warn", 2, {
+      "SwitchCase": 1
+    }],
 
+    "react/no-set-state": 0,
+    "react/tsx-first-prop-new-line": [2, "multiline-multiprop"],
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

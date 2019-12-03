@@ -33,7 +33,7 @@ const paddingFunc = ([top, right, bottom, left]: Padding = []): PaddingObject =>
 
 type Props = {
   align?: string;
-  justify?: string;
+  justify?: 'center' | 'space-between' | 'space-around';
   direction?: string;
   padding?: Padding;
   children?: any;
@@ -56,7 +56,10 @@ const Flex = (props: Props) => {
     ...style
   } as CSSProperties;
 
-  return <View style={STYLE} className={className}>{props.children}</View>;
+  return <View
+    style={STYLE}
+    className={className}
+  >{props.children}</View>;
 };
 
 export default Flex
