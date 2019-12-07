@@ -1,8 +1,10 @@
 import Taro, { useDidShow } from "@tarojs/taro";
 import Flex from "@/components/flex";
+import Cell from "@/components/cell";
 import { View, Text } from "@tarojs/components";
 import Banner from "../../components/banner/index";
 import "./account.scss";
+
 
 export default function Account(props) {
   useDidShow(() => {
@@ -14,7 +16,7 @@ export default function Account(props) {
   });
 
   return (
-    <View>
+    <View className='account-manage'>
       <Banner className='banner'>
         <Flex justify='center'>
           <Text className='banner-title'>净资产</Text>
@@ -48,6 +50,11 @@ export default function Account(props) {
           </View>
         </Flex>
       </Banner>
+
+      <View className='account-list'>
+        <Cell name='交通'>
+        </Cell>
+      </View>
 
 
     </View>

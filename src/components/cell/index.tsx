@@ -1,12 +1,21 @@
 import Taro from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import "./cell.scss";
 
-export default function Cell(props: any) {
+type CellProps = {
+  name: string,
+  renderRight?: any
+}
+
+export default function Cell(props: CellProps) {
   return (
     <View className='comp-cell'>
-      <View>{props.left}</View>
-      <View>{props.right}</View>
+      <View>
+        {props.name}
+      </View>
+      <View>
+        {props.renderRight}
+      </View>
     </View>
   );
 }

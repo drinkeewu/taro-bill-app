@@ -18,7 +18,6 @@
     }],
 
     "react/no-set-state": 0,
-    "react/tsx-first-prop-new-line": [2, "multiline-multiprop"],
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {

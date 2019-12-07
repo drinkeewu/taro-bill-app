@@ -1,4 +1,5 @@
 import "@tarojs/async-await";
+import '@/iconfont/iconfont.css'
 import Taro, { Component, Config } from "@tarojs/taro";
 import { Provider } from "@tarojs/redux";
 import Index from "./pages/home";
@@ -50,44 +51,44 @@ export class App extends Component {
       navigationBarTitleText: "Bill",
       navigationBarTextStyle: "white",
     },
-  tabBar: {
-    custom: true,
-    color: '#666',
-    selectedColor: '#6190E8',
-    list: [
-      {
-        pagePath: 'pages/home/index',
-        text: '明细',
-        iconPath: './asset/detail.png',
-        selectedIconPath: './asset/detail_selected.png'
-      },
-      {
-        pagePath: 'pages/statistics/index',
-        text: '统计',
-        iconPath:'./asset/chart.png',
-        selectedIconPath: './asset/chart_selected.png'
-      },
-      {
-        pagePath: 'pages/add-bill-fake/index',
-        iconPath: './asset/add_selected.png',
-        selectedIconPath: './asset/add_selected.png',
-        text: '添加',
-      },
-      {
-        pagePath: 'pages/account/index',
-        text: '账户',
-        iconPath: './asset/account.png',
-        selectedIconPath: './asset/account_selected.png'
-      },
-      {
-        pagePath: 'pages/setting/index',
-        text: '设置',
-        iconPath: './asset/setting.png',
-        selectedIconPath: './asset/setting_selected.png'
-      }
-    ],
+    tabBar: {
+      custom: true,
+      color: '#666',
+      selectedColor: '#6190E8',
+      list: [
+        {
+          pagePath: 'pages/home/index',
+          text: '明细',
+          iconPath: './asset/detail.png',
+          selectedIconPath: './asset/detail_selected.png'
+        },
+        {
+          pagePath: 'pages/statistics/index',
+          text: '统计',
+          iconPath:'./asset/chart.png',
+          selectedIconPath: './asset/chart_selected.png'
+        },
+        {
+          pagePath: 'pages/add-bill-fake/index',
+          iconPath: './asset/add_selected.png',
+          selectedIconPath: './asset/add_selected.png',
+          text: '添加',
+        },
+        {
+          pagePath: 'pages/account/index',
+          text: '账户',
+          iconPath: './asset/account.png',
+          selectedIconPath: './asset/account_selected.png'
+        },
+        {
+          pagePath: 'pages/setting/index',
+          text: '设置',
+          iconPath: './asset/setting.png',
+          selectedIconPath: './asset/setting_selected.png'
+        }
+      ],
 
-  }
+    }
   };
 
   componentDidShow() {}

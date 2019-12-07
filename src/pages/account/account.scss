@@ -8,6 +8,12 @@
 .sider {
   width: 50%;
   &.left{
+    border-right: 1px solid #fff;
   }
 }
 
+.account-list {
+  width: 100%;
+  position: fixed;
+  top: 120PX;
+}
