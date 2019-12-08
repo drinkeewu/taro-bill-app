@@ -42,22 +42,22 @@ export default ({ days } : Props) => {
             days.map((day, index) => {
               return (
                 <View key={"day-item" + index}>
-                    <Flex
-                      className='detail-item__title'
-                      justify='space-between'
-                      padding={['5px', '20px']}
-                      style={borderBottomStyle}
-                      align='center'
-                    >
+                  <Flex
+                    className='detail-item__title'
+                    justify='space-between'
+                    padding={['5px', '20px']}
+                    style={borderBottomStyle}
+                    align='center'
+                  >
 
-                      <Text>
-                        {day.date} {WEEK_FILTER[day.week]}
-                      </Text>
+                    <Text>
+                      {day.date} {WEEK_FILTER[day.week]}
+                    </Text>
 
-                      <Text>
-                        {CHARGE_TYPE[day.chargeType]}: {day.total}
-                      </Text>
-                    </Flex>
+                    <Text>
+                      {CHARGE_TYPE[day.chargeType]}: {day.total}
+                    </Text>
+                  </Flex>
                   {day.bills &&
                     day.bills.map((bill, bIndex) => {
                       return (
@@ -79,7 +79,7 @@ export default ({ days } : Props) => {
                           <Text>{bill.amount}</Text>
                         </Flex>
                       );
-                  })}
+                    })}
                 </View>
               );
             })}

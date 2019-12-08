@@ -1,9 +1,11 @@
 import Taro, { useDidShow } from "@tarojs/taro";
+import { AtButton, AtIcon } from "taro-ui";
 import Flex from "@/components/flex";
 import Cell from "@/components/cell";
-import { View, Text } from "@tarojs/components";
+import { View, Text, ScrollView } from "@tarojs/components";
 import Banner from "../../components/banner/index";
 import "./account.scss";
+import SectionWrapper from '../../components/section-wrapper/index';
 
 
 export default function Account(props) {
@@ -51,11 +53,45 @@ export default function Account(props) {
         </Flex>
       </Banner>
 
-      <View className='account-list'>
-        <Cell name='交通'>
-        </Cell>
-      </View>
-
+      <ScrollView
+        className='account-list'
+        scrollY
+        enableBackToTop
+      >
+        {
+          //TODO 账户列表
+          Array.from({length: 12}, (v, i) => i+1).map(item =>
+            <SectionWrapper
+              key={`cell${item}`}
+              leftTitle='现金'
+              rightTitle='200'
+            >
+              <Cell name='交通' icon='zhanghu' >
+              </Cell>
+            </SectionWrapper>
+          )
+        }
+        <Flex
+          justify='center'
+          align='center'
+          padding={['20px', '0','30px', '0']}
+        >
+          <AtButton
+            type='primary'
+            full
+          >
+            <AtIcon
+              value='add'
+              size='12'
+              color='#fff'
+              customStyle={{
+                marginRight: '10px'
+              }}
+              />
+                添加账户
+          </AtButton>
+        </Flex>
+      </ScrollView>
 
     </View>
   );

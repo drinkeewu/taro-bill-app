@@ -4,6 +4,7 @@
 .banner-title,
 .banner-asset {
   color: #fff;
+  font-size: 32px;
 }
 .sider {
   width: 50%;
@@ -15,5 +16,7 @@
 .account-list {
   width: 100%;
   position: fixed;
-  top: 120PX;
+  top: 126PX;
+  bottom: 61PX;
+  height: calc(100% - 185PX);
 }

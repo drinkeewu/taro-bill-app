@@ -31,7 +31,7 @@ const paddingFunc = ([top, right, bottom, left]: Padding = []): PaddingObject =>
   };
 };
 
-type Props = {
+type FlexProps = {
   align?: string;
   justify?: 'center' | 'space-between' | 'space-around';
   direction?: string;
@@ -41,7 +41,7 @@ type Props = {
   [propName: string]: any
 };
 
-const Flex = (props: Props) => {
+const Flex = (props: FlexProps) => {
   const { align, justify, direction, padding, style, className } = props;
 
   const STYLE = {
