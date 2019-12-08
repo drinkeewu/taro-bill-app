@@ -32,10 +32,13 @@ export default ({ days } : Props) => {
   return (
     <View>
       <Banner />
-      <ScrollView className='home-detail' style={{
-        paddingTop: 74 + 'px',
-        paddingBottom: 60 + 'px'
-      }}
+      <ScrollView
+        className='home-detail'
+        scrollY
+        style={{
+          paddingTop: 74 + 'px',
+          paddingBottom: 60 + 'px'
+        }}
       >
         <View className='detail-item'>
           {days &&
