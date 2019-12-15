@@ -2,7 +2,7 @@ import Taro, { useDidShow } from '@tarojs/taro';
 import { View, Text } from '@tarojs/components';
 import Banner from '@/components/banner';
 import Flex from '@/components/flex';
-import { AtAvatar } from 'taro-ui';
+import { AtAvatar, AtTabs, AtTabsPane } from 'taro-ui';
 
 // eslint-disable-next-line import/no-commonjs
 const avatarURL = require('@/asset/img/avatar.jpeg')

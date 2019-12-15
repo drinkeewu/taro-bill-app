@@ -10,8 +10,8 @@ const Render = ({
   children
 }: RenderProps) => {
   return rif
-  ? <Block>{children}</Block>
-  : null
+    ? <Block>{children}</Block>
+    : null
 }
 
 

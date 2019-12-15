@@ -40,6 +40,16 @@ export default function Statistics() {
 
   const billTypeTabs = getTypeTabsData(billType, true)
   const cycleTypeTabs = getTypeTabsData(cycleType)
+  const TABS = Array.from(
+    {length: 8}, (v, i) => ({
+      name: `${26+i}周`,
+      index: 26+i
+    })
+  )
+
+
+
+
 
   function getTypeTabsData(
     param: object,
@@ -117,40 +127,11 @@ export default function Statistics() {
       </Banner>
 
       <ScrollView className='statistics-page__content'>
-        <AtTabs
-          current={current}
-          scroll
-          tabList={[
-            { title: '标签页1' },
-            { title: '标签页2' },
-            { title: '标签页3' },
-            { title: '标签页4' },
-            { title: '标签页5' },
-            { title: '标签页6' }
-          ]}
-          onClick={onTabsClick}
-        >
-          <AtTabsPane current={this.state.current} index={0}>
-            <View style='font-size:18px;text-align:center;height:100px;'>标签页一的内容</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={1}>
-            <View style='font-size:18px;text-align:center;height:100px;'>标签页二的内容</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={2}>
-            <View style='font-size:18px;text-align:center;height:100px;'>标签页三的内容</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={3}>
-            <View style='font-size:18px;text-align:center;height:100px;'>标签页四的内容</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={4}>
-            <View style='font-size:18px;text-align:center;height:100px;'>标签页五的内容</View>
-          </AtTabsPane>
-          <AtTabsPane current={this.state.current} index={5}>
-            <View style='font-size:18px;text-align:center;height:100px;'>标签页六的内容</View>
-          </AtTabsPane>
-        </AtTabs>
-
-        <ScrollTabs />
+        <ScrollTabs
+          data={TABS}
+          columnNumber={5}
+          defaultActive={TABS[TABS.length - 1].index}
+        />
       </ScrollView>
     </View>
   );

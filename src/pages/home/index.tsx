@@ -37,9 +37,9 @@ export default function Home()  {
       && this.$scope.getTabBar().setData({
         selected: 0
       })
-    // Router.to({
-    //   name: 'setting'
-    // })
+    Router.to({
+      name: 'statistics'
+    })
   })
 
 
