@@ -52,6 +52,7 @@ export default function ScrollTabs(
 
   const onItemClick = useCallback(
     (itemIndex:number, index:number) => {
+      console.log(itemIndex);
       autoScrollTo(index)
       setActiveTab(itemIndex)
       props.onChange && props.onChange(itemIndex)
@@ -73,9 +74,18 @@ export default function ScrollTabs(
     [activeTab, data, onItemClick, props.defaultActive]
   )
 
+  const onDataChange = useCallback(
+    () => {
+      const lastIndex = data.length - 1
+      const lastItemIndex = data[lastIndex].index
+      onItemClick(lastItemIndex, lastIndex)
+    },
+    [data, onItemClick],
+  )
+
   useEffect(() => {
-    initClick()
-  }, [data, initClick])
+    onDataChange()
+  }, [onDataChange])
 
   useDidShow(() => {
     initClick()
