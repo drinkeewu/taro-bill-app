@@ -1,10 +1,10 @@
-import Taro, { useState, useDidShow, useEffect } from "@tarojs/taro";
+import Taro, { useState, useDidShow, useEffect, useRef } from "@tarojs/taro";
 import { View, Text, Button, ScrollView } from "@tarojs/components";
 import Tabs from "@/components/tabs";
 import Flex from "@/components/flex";
 import Banner from "@/components/banner";
-import ScrollTabs from '../../components/scroll-tabs/index';
-import { AtTabs, AtTabsPane } from 'taro-ui';
+// eslint-disable-next-line no-unused-vars
+import ScrollTabs, { ScrollTabItem } from '../../components/scroll-tabs/index';
 import './statistics.scss'
 
 
@@ -17,6 +17,16 @@ export enum CycleType {
   Week = 0,
   Month,
   Year
+}
+
+export enum Weekday  {
+  Sun = 0,
+  Mon,
+  Tue,
+  Wed,
+  Thu,
+  Fri,
+  Sat
 }
 
 /** 账单类型 */
@@ -36,16 +46,87 @@ const cycleType = Object.freeze({
 export default function Statistics() {
   const [activeBillType, setActiveBillType] = useState(BillType.Cost);
   const [activeCycleType, setActiveCycleType] = useState(CycleType.Week)
-  const [current, setCurrent] = useState(0)
 
   const billTypeTabs = getTypeTabsData(billType, true)
   const cycleTypeTabs = getTypeTabsData(cycleType)
-  const TABS = Array.from(
-    {length: 8}, (v, i) => ({
-      name: `${26+i}周`,
-      index: 26+i
-    })
-  )
+
+
+  const WEEK_TABS = getWeekTabItems()
+  const MONTH_TABS = getMonthTabItems()
+  const YEAR_TABS = getYearTabItems()
+
+  const tabItems = {
+    [CycleType.Week]: WEEK_TABS,
+    [CycleType.Month]: MONTH_TABS,
+    [CycleType.Year]: YEAR_TABS
+  }
+
+  const TAB_ITEMS = tabItems[activeCycleType]
+
+  function getWeekTabItems():ScrollTabItem[] {
+    return Array.from(
+      { length: getWeekIndexOfYear() - 1 },
+      (v, i) => ({
+        name: `${i+1}周`,
+        index: i+1
+      })
+    )
+  }
+
+  function getMonthTabItems():ScrollTabItem[]{
+    const monthIndex = new Date().getMonth() + 1
+    return [
+      ...Array.from(
+        { length: monthIndex - 2},
+        (v, i) => ({
+          name: `${i+1}月`,
+          index: i+1
+        })
+      ),
+      {
+        name: '上月',
+        index:monthIndex - 1
+      },
+      {
+        name: '本月',
+        index: monthIndex
+      }
+    ]
+  }
+
+  function getYearTabItems():ScrollTabItem[] {
+    return [
+      {
+        name: '去年',
+        index: new Date().getFullYear() - 1
+      },
+      {
+        name: '今年',
+        index: new Date().getFullYear()
+      }
+    ]
+  }
+
+  function getDayIndexOfYear():number{
+    const currentYear = new Date().getFullYear().toString()
+    const passTimestamp = new Date().getTime() - new Date(currentYear).getTime()
+    return  Math.ceil(passTimestamp / 8.65e7) + 1
+  }
+
+  function getWeekIndexOfYear() {
+    const nowDayIndex = getDayIndexOfYear()
+    const firstDay = new Date(`${new Date().getFullYear()}-01-01`).getDay()
+    const firstWeekendDate = firstDay === Weekday.Sun
+      ? 1
+      : 7 - firstDay + 1
+    return nowDayIndex <= firstWeekendDate
+      ? 1
+      : Math.ceil((nowDayIndex - firstWeekendDate) / 7)
+  }
+
+  // function isLeapYear(year: number):boolean {
+  //   return (year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0))
+  // }
 
 
 
@@ -79,12 +160,11 @@ export default function Statistics() {
     }
   }
 
-  function onTabsClick(val: number) {
-    setCurrent(val)
-  }
+
 
 
   useDidShow(() => {
+    console.log(getMonthTabItems())
     this.$scope.getTabBar &&
       typeof this.$scope.getTabBar === "function" &&
       this.$scope.getTabBar().setData({
@@ -126,11 +206,13 @@ export default function Statistics() {
         </Flex>
       </Banner>
 
-      <ScrollView className='statistics-page__content'>
+      <ScrollView
+        className='statistics-page__content'
+      >
         <ScrollTabs
-          data={TABS}
+          data={TAB_ITEMS}
           columnNumber={5}
-          defaultActive={TABS[TABS.length - 1].index}
+          defaultActive={TAB_ITEMS[TAB_ITEMS.length - 1].index}
         />
       </ScrollView>
     </View>

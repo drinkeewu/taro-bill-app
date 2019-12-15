@@ -30,7 +30,6 @@ export default function Home()  {
   ]);
 
 
-
   useDidShow(() => {
     this.$scope.getTabBar
       && typeof this.$scope.getTabBar === 'function'

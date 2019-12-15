@@ -1,17 +1,19 @@
-import Taro, { useState } from "@tarojs/taro";
+import Taro, { useState ,useDidShow, useCallback, useEffect} from "@tarojs/taro";
 import { ScrollView, View, Text } from "@tarojs/components";
 import "./scroll-tabs.scss";
 
-type ScrollTabsProps = {
-  /** 标题数据 */
-  data: {
+export type ScrollTabItem = {
     name: string,
     index: number
-  }[],
+}
+
+type ScrollTabsProps = {
+  /** 标题数据 */
+  data: ScrollTabItem[],
   /** 列数 */
   columnNumber?: number,
   onChange?: (val:number) => void,
-  defaultActive?: number
+  defaultActive?: number,
 };
 
 export default function ScrollTabs(
@@ -21,7 +23,7 @@ export default function ScrollTabs(
     data = []
   } = props
 
-  const tabItem = (index:number) => `scroll-tab-item${index}`
+  const tabItemId = (index:number) => `scroll-tab-item${index}`
 
   const defaultColumnNumber = 3
   const columnNumber = props.columnNumber || defaultColumnNumber
@@ -29,28 +31,55 @@ export default function ScrollTabs(
 
 
   const [activeTab, setActiveTab] = useState(props.defaultActive)
-  const [scrollToView, setScrollToView] = useState(tabItem(data.length - 1))
+  const [scrollToView, setScrollToView] = useState(tabItemId(data.length - 1))
 
-  function onItemClick(
-    itemIndex:number,
-    index:number
-  ) {
-    autoScrollTo(index)
-    setActiveTab(itemIndex)
-    props.onChange && props.onChange(itemIndex)
-  }
+
 
   /** 自动滚动到指定目标 */
-  function autoScrollTo(index:number) {
-    const half = Math.floor(columnNumber / 2)
-    if(index >= (
-      half + columnNumber % half)
-    ) {
-      setScrollToView(tabItem(index - 2))
-    } else {
-      setScrollToView(tabItem(0))
-    }
-  }
+  const autoScrollTo = useCallback(
+    (index:number) => {
+      const half = Math.floor(columnNumber / 2)
+      if(index >= (
+        half + columnNumber % half)
+      ) {
+        setScrollToView(tabItemId(index - 2))
+      } else {
+        setScrollToView(tabItemId(0))
+      }
+    },
+    [columnNumber],
+  )
+
+  const onItemClick = useCallback(
+    (itemIndex:number, index:number) => {
+      autoScrollTo(index)
+      setActiveTab(itemIndex)
+      props.onChange && props.onChange(itemIndex)
+    },
+    [autoScrollTo, props],
+  )
+
+
+  const initClick = useCallback(
+    () => {
+      const activeIndex = data.findIndex(i => i.index === props.defaultActive)
+      const lastIndex = data.length - 1
+      activeTab !== props.defaultActive
+      && onItemClick(
+        props.defaultActive || data[lastIndex].index,
+        activeIndex || lastIndex
+      )
+    },
+    [activeTab, data, onItemClick, props.defaultActive]
+  )
+
+  useEffect(() => {
+    initClick()
+  }, [data, initClick])
+
+  useDidShow(() => {
+    initClick()
+  })
 
 
   return (
@@ -63,7 +92,7 @@ export default function ScrollTabs(
       {props.data && props.data.map((item, index) => (
         <View
           key={`item${item.index}`}
-          id={`scroll-tab-item${index}`}
+          id={tabItemId(index)}
           className={
             `comp-scroll-tabs__item ${
               item.index === activeTab
