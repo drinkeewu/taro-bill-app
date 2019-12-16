@@ -1,0 +1,16 @@
+.echarts {
+  width: 100%;
+  height: 180PX;
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+ec-canvas {
+  width: 100%;
+  height: 100%;
+}

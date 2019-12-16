@@ -6,28 +6,30 @@ import { Week, ChargeType } from "./detail/types";
 
 
 export default function Home()  {
-  const [days, setDays] = useState([
-    {
-      date: "08月08日",
-      week: Week.Sun,
-      chargeType: ChargeType.Income,
-      total: 88,
-      bills: [
-        {
-          category: "餐饮",
-          desc: "早餐",
-          amount: 12
-        },
-        {
-          category: "餐饮",
-          desc: "早餐",
-          amount: 12
-        }
-      ]
-    },
-
-
-  ]);
+  const initState = Array.from(
+    {length: 6},
+    (v, i) => (
+      {
+        date: `08月${i+1}日`,
+        week: Week.Sun % 7,
+        chargeType: ChargeType.Income,
+        total: 88,
+        bills: [
+          {
+            category: "餐饮",
+            desc: "早餐",
+            amount: 12
+          },
+          {
+            category: "餐饮",
+            desc: "早餐",
+            amount: 12
+          }
+        ]
+      }
+    )
+  )
+  const [days, setDays] = useState(initState);
 
 
   useDidShow(() => {
@@ -36,9 +38,9 @@ export default function Home()  {
       && this.$scope.getTabBar().setData({
         selected: 0
       })
-    Router.to({
-      name: 'statistics'
-    })
+    // Router.to({
+    //   name: 'statistics'
+    // })
   })
 
 

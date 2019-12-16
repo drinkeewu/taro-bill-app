@@ -68,6 +68,9 @@ const config = {
           }
         }
       }
+    },
+    compile: {
+      include: ['taro-f2']
     }
   },
   h5: {

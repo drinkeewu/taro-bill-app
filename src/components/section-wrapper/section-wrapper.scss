@@ -4,5 +4,7 @@
   text {
     color: #999;
   }
-  border-bottom: 1px solid #f3f3f3;
+  &.border {
+    border-bottom: 1px solid #f3f3f3;
+  }
 }

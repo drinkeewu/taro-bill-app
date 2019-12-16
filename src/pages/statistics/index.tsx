@@ -3,9 +3,11 @@ import { View, Text, Button, ScrollView } from "@tarojs/components";
 import Tabs from "@/components/tabs";
 import Flex from "@/components/flex";
 import Banner from "@/components/banner";
+import Chart from '@/components/chart'
 // eslint-disable-next-line no-unused-vars
 import ScrollTabs, { ScrollTabItem } from '../../components/scroll-tabs/index';
 import './statistics.scss'
+import SectionWrapper from "@/components/section-wrapper";
 
 
 export enum BillType {
@@ -164,7 +166,6 @@ export default function Statistics() {
 
 
   useDidShow(() => {
-    console.log(getMonthTabItems())
     this.$scope.getTabBar &&
       typeof this.$scope.getTabBar === "function" &&
       this.$scope.getTabBar().setData({
@@ -206,7 +207,7 @@ export default function Statistics() {
         </Flex>
       </Banner>
 
-      <ScrollView
+      <View
         className='statistics-page__content'
       >
         <ScrollTabs
@@ -214,7 +215,53 @@ export default function Statistics() {
           columnNumber={5}
           defaultActive={TAB_ITEMS[TAB_ITEMS.length - 1].index}
         />
-      </ScrollView>
+      </View>
+      <View>
+
+        <View className='main-content'>
+          <View className='value-content'>
+            <Text className='total'>
+              总支出: 8888
+            </Text>
+            <Text>
+              平均值: 8888
+            </Text>
+          </View>
+          <View className='chart-wrapper'>
+            <Chart
+              option={{
+                grid: {
+                  top: 20,
+                  bottom :20,
+                  right: 0
+                },
+                xAxis: {
+                  type: 'category',
+                  data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                },
+                yAxis: {
+                  type: 'value'
+                },
+                series: [{
+                  data: [820, 932, 901, 934, 1290, 1330, 1320],
+                  type: 'line'
+                }]
+              }}
+            />
+          </View>
+          <View className='ranking'>
+            <SectionWrapper
+              leftTitle='支出排行榜'
+              border={false}
+            >
+              <ScrollView
+                scrollY
+              >
+              </ScrollView>
+            </SectionWrapper>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
