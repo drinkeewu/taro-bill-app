@@ -4,10 +4,11 @@ import Tabs from "@/components/tabs";
 import Flex from "@/components/flex";
 import Banner from "@/components/banner";
 import Chart from '@/components/chart'
-// eslint-disable-next-line no-unused-vars
-import ScrollTabs, { ScrollTabItem } from '../../components/scroll-tabs/index';
-import './statistics.scss'
 import SectionWrapper from "@/components/section-wrapper";
+import ScrollTabs, { ScrollTabItem } from '../../components/scroll-tabs/index';
+import Cell from '@/components/cell';
+import { AtProgress } from "taro-ui";
+import './statistics.scss'
 
 
 export enum BillType {
@@ -255,8 +256,28 @@ export default function Statistics() {
               border={false}
             >
               <ScrollView
+                className='ranking-scroll'
                 scrollY
               >
+                {
+                  [1,23,4,5,6,7].map((item) =>
+                    <Cell
+                      key={`cell${item}`}
+                      icon='usr'
+                      renderRight={
+                        <Flex
+                          justify='center'
+                          direction='column'
+                        >
+                          <Text>描述</Text>
+                          <AtProgress percent={67} />
+                        </Flex>
+                      }
+                    >
+
+                    </Cell>
+                  )
+                }
               </ScrollView>
             </SectionWrapper>
           </View>

@@ -39,7 +39,7 @@ export default function Home()  {
         selected: 0
       })
     // Router.to({
-    //   name: 'statistics'
+      // name: 'statistics'
     // })
   })
 

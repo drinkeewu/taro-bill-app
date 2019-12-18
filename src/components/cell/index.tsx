@@ -6,9 +6,9 @@ import Flex from "../flex";
 
 type CellProps = {
   icon: string,
-  name: string,
+  name?: string,
   renderRight?: any,
-  children: any
+  children?: any
 }
 
 export default function Cell(props: CellProps) {
@@ -25,7 +25,7 @@ export default function Cell(props: CellProps) {
         </View>
         {props.name}
       </Flex>
-      <View>
+      <View className='comp-cell__render-right'>
         {props.renderRight}
       </View>
     </View>

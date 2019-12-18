@@ -10,8 +10,9 @@ import waldenTheme from './theme/walden.json'
 echarts.registerTheme('walden', waldenTheme)
 
 
-type ChartProps = {
+type IChartProps = {
   option: object,
+  height?: string
 }
 
 function Echarts(props: ChartProps) {
@@ -47,7 +48,10 @@ function Echarts(props: ChartProps) {
   }, [initChart])
 
   return (
-    <View className='echarts'>
+    <View className='echarts' style={{
+      height: props.height || '150PX'
+    }}
+    >
       <ec-canvas
         id='mychart-dom-area'
         canvas-id='mychart-area'

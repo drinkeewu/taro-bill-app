@@ -1,13 +1,15 @@
 import "@tarojs/async-await";
 import '@/iconfont/iconfont.css'
+import "./app.scss";
 import Taro, { Component, Config } from "@tarojs/taro";
 import { Provider } from "@tarojs/redux";
 import Index from "./pages/home";
 
 import configStore from "./store";
 
-import "./app.scss";
+
 import { addDateUtil } from './utils/index';
+
 
 
 addDateUtil()

@@ -38,14 +38,23 @@ type FlexProps = {
   padding?: Padding;
   children?: any;
   style?:CSSProperties,
+  inline?: boolean,
   [propName: string]: any
 };
 
 const Flex = (props: FlexProps) => {
-  const { align, justify, direction, padding, style, className } = props;
+  const {
+    align,
+    justify,
+    direction,
+    padding,
+    style,
+    className,
+    inline
+  } = props;
 
   const STYLE = {
-    display: "flex",
+    display: inline ? 'inline-flex' : 'flex',
     alignItems: align || "unset",
     justifyContent: justify || "start",
     flexDirection: direction || "flex-start",

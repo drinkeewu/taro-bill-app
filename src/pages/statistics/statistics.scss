@@ -31,8 +31,15 @@
       box-sizing: border-box;
     }
     .ranking {
+      position: relative;
       flex: 1;
       border-top: 1px solid #eee;
+      &-scroll {
+        position: absolute;
+        top: 32PX;
+        bottom: 0;
+        padding: 10PX 0;
+      }
     }
   }
 }

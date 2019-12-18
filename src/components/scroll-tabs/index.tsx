@@ -91,6 +91,25 @@ export default function ScrollTabs(
     initClick()
   })
 
+  const tabItems = data.map((item, index) => (
+    <View
+      key={`item${item.index}`}
+      id={tabItemId(index)}
+      className={
+        `comp-scroll-tabs__item ${
+          item.index === activeTab
+            ? 'is-active'
+            : ''
+        }`
+      }
+      style={{
+        width: `${columnWidthPercent}%`
+      }}
+      onClick={() => {onItemClick(item.index, index)}}
+    >
+      <Text>{item.name}</Text>
+    </View>
+  ))
 
   return (
     <ScrollView
@@ -99,25 +118,7 @@ export default function ScrollTabs(
       scrollIntoView={scrollToView}
       scrollWithAnimation
     >
-      {props.data && props.data.map((item, index) => (
-        <View
-          key={`item${item.index}`}
-          id={tabItemId(index)}
-          className={
-            `comp-scroll-tabs__item ${
-              item.index === activeTab
-                ? 'is-active'
-                : ''
-            }`
-          }
-          style={{
-            width: `${columnWidthPercent}%`
-          }}
-          onClick={() => {onItemClick(item.index, index)}}
-        >
-          <Text>{item.name}</Text>
-        </View>
-      ))}
+      {tabItems}
     </ScrollView>
   );
 }
