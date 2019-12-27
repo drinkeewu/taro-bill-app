@@ -1,0 +1,27 @@
+.bill-detail-page {
+  .bill-type-name {
+    margin-top: 15px;
+  }
+  &__content {
+    padding: 15PX;
+    .row {
+      line-height: 2;
+      border-bottom: 1px solid #eee;
+    }
+  }
+  .footer {
+    padding: 10PX;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #eee;
+    box-sizing: border-box;
+    text {
+      flex:1;
+      text-align: center;
+      &:first-child {
+        border-right: 1px solid #eee;
+      }
+    }
+  }
+}

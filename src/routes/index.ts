@@ -46,6 +46,10 @@ export const routes: Route[] = [
   {
     name: 'setting',
     path: 'pages/setting/index'
+  },
+  {
+    name: 'billDetail',
+    path: 'pages/bill-detail/index'
   }
 ]
 

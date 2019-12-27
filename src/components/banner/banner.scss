@@ -2,13 +2,15 @@
 
 .comp-banner {
   padding: 20px 30px;
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 10;
   color: #fff;
   background-color: $blue;
+  &.fixed {
+    position: fixed;
+  }
   text {
     color :#fff;
   }

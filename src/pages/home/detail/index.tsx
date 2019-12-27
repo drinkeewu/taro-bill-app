@@ -5,6 +5,7 @@ import Flex from "@/components/flex";
 import "./detail.scss";
 import { Week, ChargeType, Props } from "./types";
 import Banner from '../banner/index'
+import Router from '@/routes';
 
 export const WEEK_FILTER = {
   [Week.Sun]: "星期日",
@@ -66,6 +67,12 @@ export default ({ days } : Props) => {
                           align='center'
                           padding={['5px', '20px']}
                           key={`bill-item-${bIndex}`}
+                          onClick={() => {Router.to({
+                            name :'billDetail',
+                            query: {
+                              billType: '类别'
+                            }
+                          })}}
                         >
                           <Flex align='center'>
                             <AtAvatar

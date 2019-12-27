@@ -44,8 +44,7 @@ export class App extends Component {
       'pages/statistics/index',
       'pages/account/index',
       'pages/setting/index',
-
-
+      'pages/bill-detail/index'
     ],
     window: {
       backgroundTextStyle: "light",

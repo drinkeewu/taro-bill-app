@@ -39,6 +39,7 @@ type FlexProps = {
   children?: any;
   style?:CSSProperties,
   inline?: boolean,
+  onClick?: () => void,
   [propName: string]: any
 };
 
@@ -68,6 +69,7 @@ const Flex = (props: FlexProps) => {
   return <View
     style={STYLE}
     className={className}
+    onClick={props.onClick}
   >{props.children}</View>;
 };
 
