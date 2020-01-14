@@ -1,6 +1,6 @@
 # Taro Bill App
 
-基于多段框架Taro +TypeScript的记账小程序应用
+基于多端生产框架Taro +TypeScript的记账小程序应用
 
 ## 技术选型
 
