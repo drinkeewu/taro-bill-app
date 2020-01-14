@@ -26,5 +26,5 @@
 - [ ] 设置页面
 - [ ] 数据接口
 
-## 预览
+## 项目截图
 ![image](https://raw.githubusercontent.com/drinkeewu/taro-bill-app/master/md-img/screenshot.png)
