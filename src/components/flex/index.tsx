@@ -49,7 +49,7 @@ const Flex = (props: FlexProps) => {
     justify,
     direction,
     padding,
-    style,
+    style = {},
     className,
     inline
   } = props;
