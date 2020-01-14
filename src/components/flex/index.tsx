@@ -69,7 +69,7 @@ const Flex = (props: FlexProps) => {
   return <View
     style={STYLE}
     className={className}
-    onClick={props.onClick}
+    onClick={() => {props.onClick}}
   >{props.children}</View>;
 };
 
